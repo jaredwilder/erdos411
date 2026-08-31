@@ -20,12 +20,12 @@ paper draft: [`paper/eg411_r2_bridge_cascade_omega_ladder.tex`](paper/eg411_r2_b
 
 | result | status |
 |---|---|
-| **The bridge:** exceptional p ⟺ 3φ(N) = 2N + 2, with p = 2φ(N) − 1 - connecting Steinerberger (2504.08023) to Hercher's equation φ(n) = (2/3)(n+1) (2504.19915). Neither paper draws the connection | PROVEN; Lean `reduction`, `master_identity` |
+| **The bridge:** exceptional p ⟺ 3φ(N) = 2N + 2, with p = 2φ(N) − 1. This gives a clean machine-checked normalization of Steinerberger's residual condition to the totient equation studied by Hercher | PROVEN; Lean `reduction`, `master_identity` |
 | The `p ≡ 7 (mod 8)` clause is **automatic** - the entire content of r=2 is the primality of p | PROVEN; Lean `mod8_free` |
 | **Cascade lemma:** 3φ(6^(2^j)−1) = 2(6^(2^j)−1)+2 ⟺ every 6^(2^k)+1 (k<j) is prime | Lean `cascade_lemma` - **axiom-free** ({propext, Classical.choice, Quot.sound}, no `native_decide`) |
 | Cascade terminates at j=3 (6^8+1 = 17·98801), so the cascade's exceptional primes are **exactly {7, 47}** | PROVEN + COMPUTED; Lean `six8_not_prime`, `cascade_exceptional_primes` |
 | Primality sieve ℓ∣p ⟺ N ≡ −4⁻¹ (mod ℓ) - mechanism explaining why p_2 = 1727 and p_3 = 2239487 are composite | PROVEN |
-| **No covering congruence can close r=2** (all coprime residues reachable for every ℓ ≥ 5) | PROVEN, negative theorem |
+| Local congruence reachability for each prime modulus ℓ ≥ 5 | PROVEN locally; the stronger finite-covering no-go is not claimed without a simultaneous realization argument |
 | Any exceptional prime beyond {7,47} has **ω(N) ≥ 5** | Lean kernel, axiom-free |
 | **ω(N) ≥ 6** (`omega5_empty`: the 22-leaf ω=5 kill-tree, node-for-node) | Lean kernel; 3 logical axioms + 33 disclosed `native_decide` certificates |
 | **ω(N) ≥ 8**: ω = 5, 6, 7 kill-trees all EMPTY (272,676 terminals at ω=7; independent from-scratch re-enumeration over 17.96·10⁹ candidates; certificates in the release assets) | COMPUTED, hostile-reviewed - beyond Hercher's published ω ≥ 7 |
@@ -52,6 +52,8 @@ is the honest replacement, built the same week the retraction was written.
 
 | path | contents |
 |---|---|
+| `EG411Formal.lean` | live default root: bridge, cascade, solution structure, and ω-ladder only |
+| `EG411Historical.lean` | preserved pre-retraction import graph for audit/reproduction; not the live theorem target |
 | `EG411Formal/RealResult.lean` | the bridge, master identity, mod8_free, cascade backbone, cascade termination, {7,47} |
 | `EG411Formal/CascadeLemma.lean` | the general cascade lemma (axiom-free) |
 | `EG411Formal/SolutionStructure.lean`, `OmegaLadder.lean`, `OmegaCapstone.lean` | solution structure (odd, squarefree, chain-free), ω ≤ 4 classification, `exceptional_high_omega` |
@@ -72,16 +74,18 @@ generated 628 MB `OmegaTree7.lean`) exceed sane git limits and live in the GitHu
 ```bash
 elan toolchain install $(cat lean-toolchain)   # leanprover/lean4:v4.29.1
 lake exe cache get
-lake build                                     # root module EG411Formal.lean
+lake build                                     # live root: EG411Formal.lean
 lake build EG411Formal.RealResult EG411Formal.CascadeLemma \
            EG411Formal.SolutionStructure EG411Formal.OmegaLadder \
-           EG411Formal.OmegaCapstone                # the real-result modules
+           EG411Formal.OmegaCapstone EG411Formal.OmegaTree5
 ```
 
-Note the historical root module `EG411Formal.lean` predates the retraction and does
-**not** import the real-result modules - build them by name as above (each was green
-against this pin when written; re-verified footprints are recorded in
-`docs/AXIOM_AUDIT.md`). Rebinding the root module is hardening lane 411-H1/H7 work.
+The historical root is deliberately separate:
+
+```bash
+lake env lean EG411Historical.lean
+```
+
 Mathlib is pinned by `lake-manifest.json` (v4.29.1). Axiom footprints per theorem:
 see [`docs/AXIOM_AUDIT.md`](docs/AXIOM_AUDIT.md) - headline algebraic results close
 over Mathlib's standard three; concrete primality facts additionally carry
