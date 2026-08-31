@@ -15,9 +15,9 @@
 
 ## Retraction notice
 
-The corpus's earlier headline — `eg411_r2_unconditional_closure` over
+The corpus's earlier headline - `eg411_r2_unconditional_closure` over
 `cambie_depth3_check`, with the project-local axiom
-`rosser_schoenfeld_1962_thm7_cambie` — is **RETRACTED**
+`rosser_schoenfeld_1962_thm7_cambie` - is **RETRACTED**
 (`RETRACTION-EG411-R2-2026-06-09.md`, authoritative). Those Lean theorems are valid
 statements about an unrelated predicate and remain in-tree as labeled history; they
 say nothing about EG#411. Do not cite them as closure. Receipts under `receipts/`
@@ -29,5 +29,5 @@ Import baseline of the working corpus `EG411Formal` (2026-08-31), captured from 
 research tree with scratch files excluded and oversize computed certificates moved to
 release assets (`receipts/LARGE_ARTIFACTS.md`, SHA-256-pinned; full import inventory
 in `receipts/IMPORT_MANIFEST.sha256`). Normal work here is reproduction, source
-binding, axiom audit/discharge, checker hardening, and publication cleanup — see
+binding, axiom audit/discharge, checker hardening, and publication cleanup - see
 `REOPEN_GUARD.md`.

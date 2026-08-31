@@ -10,7 +10,7 @@ certificates, preserve retractions, prepare publication artifacts.
 Not allowed by default:
 
 - re-introducing the retracted `cambie_depth3_check` closure claim in any form
-  (see `RETRACTION-EG411-R2-2026-06-09.md` — it is authoritative);
+  (see `RETRACTION-EG411-R2-2026-06-09.md` - it is authoritative);
 - weakening or restating the source target to manufacture a closure claim;
 - restarting mathematical attack branches on the residual open question.
 

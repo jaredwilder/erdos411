@@ -5,7 +5,7 @@ hardening lane 411-H2 is to re-freeze `#print axioms` output for each in CI):
 
 | theorem | file | recorded footprint |
 |---|---|---|
-| `cascade_lemma` | `EG411Formal/CascadeLemma.lean` | `{propext, Classical.choice, Quot.sound}` — axiom-free, no `native_decide` |
+| `cascade_lemma` | `EG411Formal/CascadeLemma.lean` | `{propext, Classical.choice, Quot.sound}` - axiom-free, no `native_decide` |
 | `reduction`, `master_identity`, `mod8_free`, `telescope` | `EG411Formal/RealResult.lean` | standard three; no custom axiom |
 | solution structure + ω ≤ 4 classification | `SolutionStructure.lean`, `OmegaLadder.lean`, `OmegaCapstone.lean` | standard three (13 theorems audited SOUND) |
 | `omega5_empty` (⇒ ω ≥ 6) | `EG411Formal/OmegaTree5.lean` | standard three + 33 disclosed `native_decide` scan certificates |
