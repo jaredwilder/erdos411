@@ -1,18 +1,15 @@
-import EG411Formal.Basic
-import EG411Formal.Gate
-import EG411Formal.Recurrence
-import EG411Formal.Counterexamples
-import EG411Formal.AboveThresholdClosure
-import EG411Formal.LowerJumpGapDichotomy
-import EG411Formal.EG411R2Closure
-import EG411Formal.Depth4ForceOvershoot
-import EG411Formal.UnconditionalClosure
-import EG411Formal.FiniteCheckHi
-import EG411Formal.FiniteCheckHiHi
-import EG411Formal.OmegaProductBound
-import EG411Formal.S3C_Oracle_114
--- 2026-06-01: Structural Mertens kernel-verified chain (30 unconditional theorems)
-import EG411Formal.StructuralMertens
-import EG411Formal.FiniteProductMertens
-import EG411Formal.PhiNValidation
-import EG411Formal.CambieClosureChain
+import EG411Formal.RealResult
+import EG411Formal.CascadeLemma
+import EG411Formal.SolutionStructure
+import EG411Formal.OmegaLadder
+import EG411Formal.OmegaTree5
+import EG411Formal.OmegaCapstone
+
+/-!
+# EG#411 r=2 live theorem root
+
+This is the default build target for the current, non-retracted result spine.
+Historical Cambie-era modules remain in the repository for audit and reproduction, but
+are intentionally not imported here. The old import graph is preserved separately in
+`EG411Historical.lean`.
+-/
