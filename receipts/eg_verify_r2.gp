@@ -1,0 +1,24 @@
+/* R2 VERIFICATION: cambie_depth3_check at x = 999983 (level-1 short-circuit) */
+default(realprecision, 30);
+x = 999983;
+isp = isprime(x);
+mod8 = x % 8;
+N = (3*x - 1) / 4;
+phi_N = eulerphi(N);
+c2 = 3*x^2 - x + 2*(x-1)*phi_N;
+lhs = 10000 * c2;
+rhs = 9849 * 4 * x^2;
+ratio = c2*1.0 / (4*x^2);
+print("R2: cambie_depth3_check at p = ", x);
+print("  isprime: ", isp);
+print("  p mod 8: ", mod8);
+print("  N = (3p-1)/4 = ", N);
+print("  phi(N) = ", phi_N);
+print("  c2 = 3p^2 - p + 2(p-1)phi(N) = ", c2);
+print("  10000*c2 = ", lhs);
+print("  9849*4*p^2 = ", rhs);
+print("  10000*c2 >= 9849*4*p^2: ", lhs >= rhs);
+print("  c2/(4p^2) = ", ratio);
+print("  threshold = 0.9849");
+print("  passes (level-1 short-circuit): ", lhs >= rhs);
+quit;

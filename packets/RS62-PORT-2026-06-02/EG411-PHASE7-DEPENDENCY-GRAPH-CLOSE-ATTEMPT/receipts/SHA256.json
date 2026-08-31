@@ -1,0 +1,9 @@
+{
+  "README.md": "bb735d88f49e989d9ae6fef9311177f27bc49a58a6af468b97345031f2b26af2",
+  "docs/FINAL_DEPENDENCY_GRAPH_PRODUCT_THEOREM.md": "ae968aeb7ebeb386250859096cf06efb9366ef462295601a35d4161eb290f523",
+  "docs/PHASE7_DEPENDENCY_GRAPH_CLOSE_ATTEMPT.md": "a4ff3dde3e6507d913223e4e11f8f089108c20271d3a3c9d47f79abd502eab27",
+  "lean/Phase7DependencyGraphCloseAttempt.lean": "f29c17659f22884388903860bd5d1777b9096502ebfce51839b03c431bfe2efa",
+  "receipts/PHASE7_RECEIPT.json": "72187c1a6a56942e54eb7905fc3216f156ae544eb4e00a6b23f43773f60f0fac",
+  "receipts/phase7_dependency_graph_attack_1e6.json": "3986664d8daa038ef8589887369ba8b2f27dfb2a9986614f979053be35bc563d",
+  "scripts/phase7_dependency_graph_attack.py": "cb5c1b9bc028e7d2caf02209a53646861c18f95eff39ab144b22aae60e3fadd3"
+}

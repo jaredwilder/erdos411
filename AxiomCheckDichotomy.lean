@@ -1,0 +1,6 @@
+import EG411Formal.LowerJumpGapDichotomy
+open EG411Formal
+#print axioms cambie_tail_dichotomy_closes
+#print axioms dichotomy_both_branches_inhabited
+#print axioms dichotomy_witness_depth3_progresses
+#print axioms dichotomy_witness_depth4_progresses

@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-06-02T11:24:24.520905+00:00",
+  "phase": 4,
+  "mission": "Structural c2 tail",
+  "closed_phase3_obstruction": true,
+  "fully_eliminated_rs_cambie_axiom": false,
+  "main_result": "squarefree factors of N are structurally excluded from c2",
+  "lean_file": "lean/StructuralC2SquarefreeExclusion.lean",
+  "verification_limit": 1000000,
+  "verification_returncode": 0,
+  "verification_summary": {
+    "limit": 1000000,
+    "prime_mod8_7_count": 19669,
+    "bad_branch_count": 0,
+    "bad_exclusion_count": 2679,
+    "fast_count": 19543,
+    "depth_count": 19669,
+    "both_count": 19543,
+    "min_fast_ratio": {
+      "p": 633967,
+      "value": 0.954426327510668
+    },
+    "min_depth_ratio": {
+      "p": 568367,
+      "value": 1.2297092440262118
+    },
+    "min_beta_margin_when_fast_fails": {
+      "p": 282847,
+      "margin": 0.2411190995405857,
+      "alpha": 0.5702029368091074,
+      "beta": 0.3161822227485283,
+      "beta_required": 0.07506312320794262
+    }
+  },
+  "remaining_theorem": "structural_c2_tail : FastExitBranch p \u2228 Depth3OvershootBranch p"
+}

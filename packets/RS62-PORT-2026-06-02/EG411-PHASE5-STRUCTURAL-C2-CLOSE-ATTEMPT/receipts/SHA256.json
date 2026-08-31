@@ -1,0 +1,10 @@
+{
+  "README.md": "559a1910a76c6d6f95571003581466e20069486fe964ce7fa1bb7187dbb0ca26",
+  "data/phase5_threshold_samples.json": "64ae951f74476e243bd5482c7c860c9f6588234aa89c5441b245f564328189ff",
+  "docs/COMPLEMENTARY_TOTIENT_PRODUCT_LEMMA.md": "2f44a7aa85f6e2d99f995518d0dc86c70f1c8955f266c5cb412e7b43e4b6fec7",
+  "docs/PHASE5_STRUCTURAL_C2_CLOSE_ATTEMPT.md": "23ff9047a5aa80af2b67d6f5c55e82b91c710191cd300d7c154febd369b30943",
+  "lean/Phase5StructuralC2Thresholds.lean": "734b903a7b2117d4bf774bf147409f4994728a0d05f0d82ba5f752e270591308",
+  "receipts/PHASE5_RECEIPT.json": "173810ad1c7954ac342293af32252daadd4dd434d66ade6b53d1998c8d58da1b",
+  "receipts/phase5_threshold_verifier_1e6.json": "1a3634efb2c22f1cf349ccf873f1229723550497402a6a0f4eb3d50182f7d738",
+  "scripts/phase5_threshold_verifier.py": "e1b04890e48f9fb2e4d30a2c4f182867af7ed7c8875a70cdce976f74cd6a1a4b"
+}

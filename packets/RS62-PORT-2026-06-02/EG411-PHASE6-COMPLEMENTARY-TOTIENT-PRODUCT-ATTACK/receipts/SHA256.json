@@ -1,0 +1,9 @@
+{
+  "README.md": "f1f404aba7b3bb3695eb7c1d96faeb2d80dd2524518b3b91bc13b016a38a599f",
+  "docs/EXACT_CLOSE_PATCH_TARGET.md": "5ec9d7c4d7ebc12204da4bd623aba657d97d92f2e3c7ff19d5e187c74403a930",
+  "docs/PHASE6_COMPLEMENTARY_TOTIENT_PRODUCT_ATTACK.md": "4d08cbbb423e8162188f036c888c3a53a7fe874a5610814ca4bf117e9ba6108f",
+  "lean/Phase6ComplementaryTotientProductAttack.lean": "3c2131679db0e488d885b161d1a175316a5d7929d6f572105d8fac0194d80dbd",
+  "receipts/PHASE6_RECEIPT.json": "ddfa5c8606bbe7886b869f1bd2f090eb5af6a762cbea26e34eb683b35a66a614",
+  "receipts/phase6_complementary_attack_1e6.json": "d2f004a1e226dea19eb7997b8e8cb1c368a323e09deb8dd76426ad6c2c20af50",
+  "scripts/phase6_complementary_attack.py": "97a62c0240b8d1c55aabd558f97f151cecaa1ebbd8637f76b62b14b56240d623"
+}

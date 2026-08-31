@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-06-02T11:04:13.826802+00:00",
+  "mission": "Port Rosser\u2013Schoenfeld 1962 Theorem 7 enough to eliminate EG411 named axiom.",
+  "phase_0": [
+    "Open exact RS1962 Theorem 7 p.70",
+    "Transcribe statement",
+    "Identify exact inequality used by cambie_depth3_check"
+  ],
+  "phase_1": [
+    "State theorem7_explicit_mertens in Lean",
+    "Minimize dependencies"
+  ],
+  "phase_2": [
+    "Prove cambie_depth3_check from theorem7",
+    "No axiom, no sorry in bridge"
+  ],
+  "phase_3": [
+    "Replace EG411 axiom",
+    "Run lake build",
+    "Print axioms"
+  ],
+  "success": "#print axioms eg411_r2_unconditional_closure excludes rosser_schoenfeld_1962_thm7_cambie"
+}

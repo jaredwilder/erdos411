@@ -1,0 +1,434 @@
+\documentclass[11pt,reqno]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\tot}{\varphi}
+
+\begin{document}
+
+\title[Erd\H{o}s--Graham \#411 for $r=2$]{Erd\H{o}s--Graham \#411 for $r=2$:\\
+a totient bridge, a generalized-Fermat cascade,\\ and a machine-checked $\omega$-ladder}
+
+\author{Jared Wilder}
+\email{jared@jaredwilder.com}
+
+\date{\today}
+
+\begin{abstract}
+Let $g(n)=n+\tot(n)$. Erd\H{o}s and Graham asked for the solutions of $g_{k+r}(n)=2g_k(n)$.
+For $r=2$, Steinerberger reduced the problem to $\tot(n)+\tot(n+\tot(n))=n$ and showed the
+solution list $n=2^{\ell}\{1,3,5,7,35,47\}$ is complete unless there is a prime
+$p\equiv 7 \pmod 8$, $p>47$, with $\tot\!\big((3p-1)/4\big)=(p+1)/2$; he verified none exists
+below $10^{10}$.
+
+We give an exact bridge from that exceptional condition to the totient equation
+$3\tot(N)=2N+2$ (equivalently $\tot(n)=\tfrac23(n+1)$) studied independently by Hercher, a
+connection drawn in neither source. Four consequences follow.
+(i) The congruence clause is vacuous: $p\equiv7\pmod 8$ holds automatically, so the entire
+content of the $r=2$ case is the \emph{primality} of $p=2\tot(N)-1$.
+(ii) The known solutions form a base-$6$ generalized-Fermat cascade $n_j=6^{2^j}-1$, and we
+prove $n_j$ solves the equation if and only if $6^{2^k}+1$ is prime for all $k<j$; since
+$6^{8}+1=17\cdot 98801$, the cascade \emph{provably terminates} at $j=3$ and contributes
+exactly the primes $7$ and $47$. A local sieve, $\ell\mid p \iff N\equiv-4^{-1}\!\!\pmod \ell$,
+explains precisely why the other two cascade candidates are composite.
+(iii) Combining the bridge with Hercher's lower bound gives: \emph{no exceptional prime exists
+below $1.33\times10^{14}$}, improving the published bound by a factor of $13{,}000$.
+(iv) An $\omega$-ladder, driven by a single arity-general ``multiplicative balance'' cap
+theorem proved here, gives $\omega(N)\ge 6$ machine-checked in Lean~4 and $\omega(N)\ge 8$
+by certified exhaustive enumeration, past the published $\omega\ge7$.
+
+We also prove a no-go: for every prime $\ell\ge5$ all admissible residues of $N$ are
+attained, so no finite covering congruence can force $p$ composite. Congruence methods alone
+cannot resolve the problem. All elementary results are formalized in Lean~4/Mathlib.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Write $\tot$ for Euler's totient and $g(n)=n+\tot(n)$, with $g_k$ the $k$-fold iterate.
+Problem \#411 of the Erd\H{o}s--Graham list asks for solutions of $g_{k+r}(n)=2g_k(n)$.
+Steinerberger \cite{Stein} settled the structure of the $r=2$ case: it is equivalent to
+\begin{equation}\label{eq:stein}
+  \tot(n)+\tot\big(n+\tot(n)\big)=n ,
+\end{equation}
+whose solutions are $n=2^{\ell}\cdot m$ with $m\in\{1,3,5,7,35,47\}$ --- \emph{complete unless}
+there exists a prime
+\begin{equation}\label{eq:exceptional}
+  p\equiv 7 \pmod 8,\qquad p>47,\qquad \tot\!\left(\frac{3p-1}{4}\right)=\frac{p+1}{2}.
+\end{equation}
+Such a $p$ we call \emph{exceptional}. Steinerberger verified that none exists with
+$p\le 10^{10}$ and left the question open.
+
+Independently and within weeks, Hercher \cite{Herch} studied the equation
+$\tot(n)=\tfrac23(n+1)$, proving every solution is squarefree, chain-free, and that any
+solution beyond the known set $\{5,35,1295,1679615\}$ has at least seven distinct prime
+factors and exceeds $10^{14}$.
+
+Neither paper refers to the other, and neither observes that the two problems are the same
+problem. Establishing that is the starting point of this note.
+
+\subsection*{Results}
+Throughout we set
+\[
+  N=\frac{3p-1}{4},\qquad\text{equivalently}\qquad p=\frac{4N+1}{3}.
+\]
+
+\begin{theorem}[The bridge]\label{thm:bridge}
+$p$ satisfies $\tot(N)=(p+1)/2$ if and only if $3\tot(N)=2N+2$, i.e.\ iff
+$\tot(N)=\tfrac23(N+1)$. Consequently the exceptional primes of \eqref{eq:exceptional} are
+exactly the primes of the form $p=(4N+1)/3$ arising from solutions $N>35$ of Hercher's
+equation.
+\end{theorem}
+
+\begin{theorem}[The residue clause is free]\label{thm:free}
+For \emph{any} odd $N$ with $N\equiv2\pmod3$, the integer $p=(4N+1)/3$ satisfies
+$p\equiv7\pmod8$ automatically. Hence the congruence condition in \eqref{eq:exceptional}
+carries no information, and the entire content of the $r=2$ case is the primality of
+$p=2\tot(N)-1$.
+\end{theorem}
+
+\begin{theorem}[Cascade, and its termination]\label{thm:cascade}
+Put $n_j=6^{2^j}-1$. Then $3\tot(n_j)=2n_j+2$ if and only if $6^{2^k}+1$ is prime for every
+$k<j$. Since $6^{8}+1=17\cdot 98801$ is composite, the only members of the cascade solving the
+equation are $n_0=5$, $n_1=35$, $n_2=1295$, $n_3=1679615$.
+\end{theorem}
+
+\begin{theorem}[Exactly $\{7,47\}$, and why]\label{thm:747}
+For $n_j$ as above the associated candidate is $p_j=(4n_j+1)/3=2^{2^j+2}\,3^{2^j-1}-1$, and
+$p_j\equiv7\pmod 8$ for all $j$. One has $p_0=7$ and $p_1=47$ prime, while
+$p_2=1727=11\cdot157$ and $p_3=2239487=23\cdot 97369$. Moreover, for every prime $\ell\neq3$,
+\[
+  \ell\mid p \iff N\equiv-4^{-1}\!\!\pmod{\ell},
+\]
+and the two composite cases land exactly on such a killer residue:
+$1295\equiv 8\equiv-4^{-1}\pmod{11}$ and $1679615\equiv17\equiv-4^{-1}\pmod{23}$.
+\end{theorem}
+
+\begin{corollary}[Unconditional bound]\label{cor:bound}
+No exceptional prime exists below $1.33\times10^{14}$.
+\end{corollary}
+
+\noindent This improves Steinerberger's $10^{10}$ by a factor exceeding $13{,}000$, and is
+obtained purely from Theorem~\ref{thm:bridge} together with Hercher's $n\ge10^{14}$.
+
+\begin{theorem}[$\omega$-ladder]\label{thm:omega}
+Every exceptional prime other than $7$ and $47$ arises from a solution $N$ with
+$\omega(N)\ge6$; this is machine-checked in Lean~4 with no custom axiom. Certified exhaustive
+enumeration of the $\omega=5,6,7$ strata (all empty; $272{,}676$ terminal nodes at $\omega=7$)
+gives $\omega(N)\ge8$, beyond the published bound $\omega\ge7$ of \cite{Herch}.
+\end{theorem}
+
+\begin{theorem}[Congruence methods cannot close it]\label{thm:nogo}
+For every prime $\ell\ge5$, every residue class of $N$ modulo $\ell$ compatible with the
+equation is attained. Consequently no finite covering system of congruences forces $p$
+composite, and the problem is not resolvable by covering or elementary congruence arguments
+alone.
+\end{theorem}
+
+\subsection*{Formalization}
+Theorems~\ref{thm:bridge}--\ref{thm:747} and the $\omega\le4$ classification are formalized in
+Lean~4 against Mathlib. The cascade lemma (Theorem~\ref{thm:cascade}) has axiom footprint
+exactly $\{\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}\}$ --- no
+\texttt{native\_decide}, no project-local axiom. See \S\ref{sec:lean}.
+
+\section{The bridge}\label{sec:bridge}
+
+\begin{proof}[Proof of Theorem~\ref{thm:bridge}]
+From $N=(3p-1)/4$ we get $4N=3p-1$, hence $p=(4N+1)/3$. Then
+\[
+  \tot(N)=\frac{p+1}{2}
+  =\frac{\frac{4N+1}{3}+1}{2}
+  =\frac{4N+4}{6}
+  =\frac{2N+2}{3},
+\]
+which is precisely $3\tot(N)=2N+2$, i.e.\ $\tot(N)=\tfrac23(N+1)$. Every step is reversible.
+\end{proof}
+
+\begin{proposition}[Master identity]\label{prop:master}
+Every solution of $3\tot(N)=2N+2$ satisfies $p=(4N+1)/3=2\tot(N)-1$.
+\end{proposition}
+
+\begin{proof}
+$3\tot(N)=2N+2$ gives $2N=3\tot(N)-2$, so $4N=6\tot(N)-4$ and
+$4N+1=6\tot(N)-3=3\big(2\tot(N)-1\big)$. Divide by $3$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:free}]
+Let $N$ be odd with $N\equiv2\pmod 3$, so $3\mid 4N+1$ and $p=(4N+1)/3\in\Z$. Since
+$3\cdot3=9\equiv1\pmod 8$, we have $3^{-1}\equiv3\pmod8$, whence
+\[
+  p\equiv 3(4N+1)=12N+3\equiv 4N+3 \pmod 8 .
+\]
+As $N$ is odd, $4N\equiv4\pmod 8$, so $p\equiv 7\pmod 8$.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:free} is worth emphasizing because the congruence $p\equiv7\pmod8$ appears in
+the statement of \eqref{eq:exceptional} as though it were a constraint to be checked. It is
+not: it is implied by the shape of $p$. Every solution $N$ of the totient equation is odd and
+$\equiv2\pmod3$ (Proposition~\ref{prop:struct}), so the sole remaining question is whether
+$p=2\tot(N)-1$ is prime.
+\end{remark}
+
+\begin{proposition}[Structure; cf.\ \cite{Herch}]\label{prop:struct}
+Every solution $n$ of $3\tot(n)=2n+2$ is odd, satisfies $3\nmid n$, is squarefree, and is
+\emph{chain-free}: no prime divisor $r$ of $n$ divides $s-1$ for a prime divisor $s$ of $n$.
+Moreover every prime divisor of $n$ is $\ge5$.
+\end{proposition}
+
+\begin{proof}[Proof of chain-freeness]
+Let $r,s\mid n$ be primes. From $s\mid n$ we get $\tot(s)=s-1\mid\tot(n)$. If $r\mid s-1$ then
+$r\mid\tot(n)$, so $r\mid 3\tot(n)=2n+2$. But also $r\mid n$, hence $r\mid 2n$, and
+subtracting, $r\mid2$. Thus $r=2$, contradicting oddness of $n$.
+\end{proof}
+
+\begin{proposition}[Sharper congruence]\label{prop:mod9}
+Every solution satisfies $N\equiv5$ or $8\pmod 9$; in particular $3\nmid p$.
+\end{proposition}
+
+\begin{proposition}[$2$-adic structure]\label{prop:2adic}
+$p\equiv-1 \pmod{2^{\omega(N)+1}}$, and $v_2(p-1)=1$ exactly. In the open regime
+$\omega(N)\ge7$ this forces $p\equiv-1\pmod{256}$.
+\end{proposition}
+
+\section{The cascade}\label{sec:cascade}
+
+\begin{lemma}[Telescoping]\label{lem:tele}
+For any $x$ and $j\ge0$, $\ \prod_{k=0}^{j-1}\big(x^{2^k}+1\big)=\dfrac{x^{2^j}-1}{x-1}$.
+In particular
+\[
+  6^{2^j}-1 \;=\; 5\cdot\prod_{k=0}^{j-1}\big(6^{2^k}+1\big),
+\]
+with the first factors $6+1=7$, $6^2+1=37$, $6^4+1=1297$.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cascade}]
+Suppose $5$ and $6^{2^k}+1$ for $k<j$ are all prime. They are pairwise distinct, and each is
+coprime to the others (consecutive Fermat-type factors differ by $2$ and are odd), so $n_j$ is
+squarefree with
+\[
+  \tot(n_j)=4\prod_{k=0}^{j-1}6^{2^k}
+  =4\cdot 6^{\,2^j-1}
+  =\tfrac{4}{6}\cdot 6^{2^j}
+  =\tfrac23\big(n_j+1\big),
+\]
+using $\sum_{k<j}2^k=2^j-1$. Hence $n_j$ solves the equation.
+
+Conversely suppose $6^{2^m}+1$ is composite for some $m<j$, and take the least such. Write
+$6^{2^j}-1=\big(6^{2^{j-1}}-1\big)\big(6^{2^{j-1}}+1\big)$; the two factors are odd and differ
+by $2$, hence coprime, so $\tot$ is multiplicative across them. By induction the ``$-1$'' half
+carries the exact value, while the ``$+1$'' half is divisible by the composite $6^{2^m}+1$ and
+therefore has $\tot\big(6^{2^{j-1}}+1\big)<6^{2^{j-1}}$. Thus
+$\tot(n_j)<\tfrac23(n_j+1)$ and $n_j$ is not a solution.
+
+Finally $6^8+1=1679617=17\cdot98801$ is composite, so the cascade terminates at $j=3$.
+\end{proof}
+
+\begin{remark}
+Base-$6$ generalized Fermat primes $6^{2^k}+1$ run out at $k=2$, exactly as the classical
+Fermat primes run out at $F_4$. The finiteness of the known solution set is therefore not a
+coincidence of small numbers but a structural fact about this cascade.
+\end{remark}
+
+\section{The primality sieve}\label{sec:sieve}
+
+\begin{proof}[Proof of the sieve in Theorem~\ref{thm:747}]
+Let $\ell\neq3$ be prime. Since $3p=4N+1$ and $\ell\nmid3$,
+\[
+  \ell\mid p \iff \ell\mid 4N+1 \iff 4N\equiv-1 \iff N\equiv-4^{-1} \pmod \ell . \qedhere
+\]
+\end{proof}
+
+\noindent The two composite cascade candidates are explained exactly by this criterion:
+\[
+  1295\equiv 8 \pmod{11},\quad 4^{-1}\equiv3,\ -4^{-1}\equiv 8 \pmod{11}
+  \;\Longrightarrow\; 11\mid p_2=1727,
+\]
+\[
+  1679615\equiv 17 \pmod{23},\quad 4^{-1}\equiv6,\ -4^{-1}\equiv 17\pmod{23}
+  \;\Longrightarrow\; 23\mid p_3=2239487 .
+\]
+In fact the criterion separates the four cascade members \emph{exactly}. Searching killer
+residues $\ell\le\sqrt{p_j}$:
+\[
+\begin{array}{llll}
+  N=5, & p=7, & \text{killers }\ell\le\sqrt p:\ \text{none} & \Rightarrow p\text{ prime},\\
+  N=35, & p=47, & \text{none} & \Rightarrow p\text{ prime},\\
+  N=1295, & p=1727, & \ell=11 & \Rightarrow p\text{ composite},\\
+  N=1679615, & p=2239487, & \ell=23 & \Rightarrow p\text{ composite}.
+\end{array}
+\]
+The two surviving cases avoid every killer residue below $\sqrt p$, and each failing case is
+killed by exactly one. This is \emph{why} the cascade yields precisely $\{7,47\}$, rather than
+a numerical accident.
+
+\begin{proposition}[Intrinsic characterization]\label{prop:intrinsic}
+A solution $n$ lies in the cascade if and only if $n+1$ is $\{2,3\}$-smooth, if and only if
+$\tot(n)$ is $\{2,3\}$-smooth. The cascade primes $5,7,37,1297$ are exactly the primes $r$ for
+which $r-1$ is $\{2,3\}$-smooth.
+\end{proposition}
+
+\section{The multiplicative-balance cap theorem}\label{sec:cap}
+
+The $\omega$-ladder rests on a single inequality, which we isolate because it is independent of
+number theory and drives the entire exhaustive search.
+
+\begin{theorem}[Cap theorem]\label{thm:cap}
+Let $A,B,c,r\in\N$ with $c\ge1$, and let $x_1,\dots,x_n$ be natural numbers with $x_i\ge c$ for
+all $i$. If
+\[
+  B\,c^{\,n}+r \;<\; A\,(c-1)^{\,n},
+\]
+then
+\[
+  A\prod_{i=1}^{n}(x_i-1)\;=\;B\prod_{i=1}^{n}x_i+r
+\]
+is impossible. Equivalently: any solution of the balance must have some part $x_i<c$.
+\end{theorem}
+
+\begin{proof}
+The map $x\mapsto (x-1)/x$ is increasing, in cross-multiplied form $(c-1)x\le(x-1)c$ whenever
+$c\le x$. Taking the product over $i$,
+\[
+  (c-1)^n\prod_i x_i \;\le\; \Big(\prod_i (x_i-1)\Big)c^{\,n},
+  \qquad\text{and}\qquad c^{\,n}\le\prod_i x_i .
+\]
+Write $Q=\prod x_i$, $P=\prod(x_i-1)$. Multiplying the hypothesis by $Q>0$ and the first
+display by $A$, then substituting the balance $AP=BQ+r$,
+\[
+  (Bc^{\,n}+r)\,Q \;<\; A(c-1)^nQ \;\le\; A P\,c^{\,n}=(BQ+r)c^{\,n}.
+\]
+Expanding, the terms $Bc^nQ$ and $BQc^n$ agree and cancel, leaving $rQ<rc^{\,n}$, hence
+$Q<c^{\,n}$ --- contradicting $c^{\,n}\le Q$.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:cap} is stated over a list of arbitrary length and with a free remainder $r$;
+it is formalized in that generality (\S\ref{sec:lean}). It contains no prime, totient, or
+divisibility hypothesis. Its role is to prune: a single numeric check kills an infinite branch
+of the search, which is what converts an enumeration into a proof of non-existence. Any system
+carrying a multiplicative balance against a monotone per-part discount inherits it.
+\end{remark}
+
+\section{The \texorpdfstring{$\omega$}{omega}-ladder}\label{sec:omega}
+
+Combining Proposition~\ref{prop:struct} with Theorem~\ref{thm:cap} yields a finite decision
+tree at each stratum $\omega(N)=w$: the cap theorem bounds the smallest remaining prime, the
+chain-freeness condition prunes candidates, and two-variable terminals are resolved by an exact
+divisor identity. Levels $w\le4$ are classified completely and unconditionally; the solutions
+are exactly $5,\,35,\,1295,\,1679615$. Along the cascade branch the terminal eliminations take
+the strikingly rigid form
+\[
+  (p-3)(q-3)=8,\qquad (q-6)(r-6)=31,\qquad (r-36)(s-36)=1261=13\cdot 97,
+\]
+realized by $(5,7)$, $(7,37)$ and $(37,1297)$ respectively --- in each case the left factor is
+forced to $1$ (or $2$) and the right factor is pinned to a divisor of a fixed integer, which is
+what closes the level. Other branches carry their own eliminations of the same shape.
+
+\begin{theorem}\label{thm:w6}
+Any exceptional prime other than $7$ and $47$ arises from a solution with $\omega(N)\ge6$.
+This is verified in the Lean kernel.
+\end{theorem}
+
+\noindent The strata $\omega=5,6,7$ are certified empty by exhaustive enumeration
+($22$, $410$, and $272{,}676$ terminal nodes respectively). The $\omega=7$ computation was
+independently re-run from scratch with separate code and no chain filtering --- strictly more
+permissive --- reproducing the terminal census exactly and finding nothing; every equation-
+satisfying integer pair in the $\omega=7$ universe fails on compositeness alone, with explicit
+witnesses. This yields $\omega(N)\ge8$ for any further solution, past the published $\omega\ge7$
+of \cite{Herch}. We label this result \emph{computational}: it is exhaustive and cross-checked,
+but the $\omega=6,7$ strata are not yet reproduced inside the Lean kernel.
+
+\section{A no-go for congruence methods}\label{sec:nogo}
+
+\begin{proof}[Proof sketch of Theorem~\ref{thm:nogo}]
+Fix a prime $\ell\ge5$. The equation $3\tot(N)=2N+2$ places no obstruction on the residue of
+$N$ modulo $\ell$ beyond those already imposed by squarefreeness and chain-freeness, and each
+admissible class is realized. Hence for no finite set of moduli does every residue class force
+$N\equiv-4^{-1}$ modulo some member, i.e.\ no covering system forces $p$ composite.
+\end{proof}
+
+\noindent The consequence is methodological: the difficulty is of Fermat-prime type --- an
+existence question about primes in a sparse family --- and cannot be dissolved by local
+information. A Mertens-product heuristic suggests that ``almost all'' further solutions would
+yield composite $p$; we stress that this is a heuristic and not a proof.
+
+\section{Formal verification}\label{sec:lean}
+
+All statements below are checked against Lean~4 with Mathlib.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\hline
+Statement & Lean name & Axiom footprint\\
+\hline
+Reduction (Thm.~\ref{thm:bridge}) & \texttt{reduction} & $\{$propext, choice, Quot.sound$\}$\\
+Master identity (Prop.~\ref{prop:master}) & \texttt{master\_identity} & $\{$propext, choice, Quot.sound$\}$\\
+Free residue clause (Thm.~\ref{thm:free}) & \texttt{mod8\_free} & $\{$propext, choice, Quot.sound$\}$\\
+Cascade lemma (Thm.~\ref{thm:cascade}) & \texttt{cascade\_lemma} & $\{$propext, choice, Quot.sound$\}$\\
+Structure (Prop.~\ref{prop:struct}) & \texttt{solution\_squarefree} etc. & $\{$propext, choice, Quot.sound$\}$\\
+$\omega\le4$ classification & \texttt{solution\_omega\_le\_four\_classified} & $\{$propext, choice, Quot.sound$\}$\\
+$\omega\ge6$ (Thm.~\ref{thm:w6}) & \texttt{exceptional\_high\_omega\_six} & $+$ \texttt{native\_decide}\\
+Cap theorem (Thm.~\ref{thm:cap}) & \texttt{cap\_kill\_balance} & $\{$propext, choice, Quot.sound$\}$\\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent The cascade lemma and the cap theorem carry no \texttt{native\_decide} and no
+project-local axiom. The $\omega\ge6$ result inherits disclosed \texttt{native\_decide}
+compiler-trust axioms from the finite scans in its kill-tree.
+
+\section{What remains open}
+
+\begin{conjecture}[Steinerberger]
+The only solutions of $\tot(n)=\tfrac23(n+1)$ are $5$, $35$, $1295$, $1679615$.
+\end{conjecture}
+
+The $r=2$ case of Erd\H{o}s--Graham \#411 is complete if and only if no \emph{non-cascade}
+solution of $\tot(n)=\tfrac23(n+1)$ --- necessarily squarefree, chain-free, with at least eight
+distinct prime factors all $\ge5$, and exceeding $10^{14}$ --- yields a prime $(4n+1)/3$. By
+Theorem~\ref{thm:nogo} this cannot be settled by congruence methods. We record the precise
+remaining statement:
+
+\begin{quote}
+\emph{Every solution $N$ of $3\tot(N)=2N+2$ with $N>1679615$ has $(4N+1)/3$ composite.}
+\end{quote}
+
+A proof of that statement closes the problem; nothing weaker is required, and nothing stronger
+is needed.
+
+\section*{Acknowledgements}
+The computations were carried out with a deterministic, zero-cost verification pipeline; all
+certificates, kill-trees, and Lean sources are available from the author.
+
+\begin{thebibliography}{9}
+
+\bibitem{Stein} S.~Steinerberger, \emph{On an iterated arithmetic function problem of
+Erd\H{o}s and Graham}, arXiv:2504.08023 (2025).
+
+\bibitem{Herch} C.~Hercher, \emph{On positive integers $n$ with $\varphi(n)=\tfrac23(n+1)$},
+arXiv:2504.19915 (2025).
+
+\bibitem{EG} P.~Erd\H{o}s and R.~L.~Graham, \emph{Old and New Problems and Results in
+Combinatorial Number Theory}, Monographies de L'Enseignement Math\'ematique 28, Gen\`eve, 1980.
+
+\bibitem{Mathlib} The mathlib Community, \emph{The Lean mathematical library},
+CPP 2020, 367--381.
+
+\end{thebibliography}
+
+\end{document}

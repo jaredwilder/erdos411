@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-06-02T11:16:21.288140+00:00",
+  "phase": 2,
+  "delivered": [
+    "Rational alpha/beta depth-3 algebra bridge",
+    "Nat-level Phase 3 target",
+    "Cambie Boolean bridge from tail alpha/beta enough",
+    "sanity-check script and receipt",
+    "Phase 3 handoff"
+  ],
+  "main_theorem": "depth3_from_alpha_beta",
+  "phase2_result": "If \u03c6(N)\u2265\u03b1N, \u03c6(c2)\u2265\u03b2c2, and 16p\u22643(2+\u03b1)(2+\u03b2)(p\u22121), then depth-3 overshoot holds.",
+  "new_phase3_target": "RS1962 product lower bound -> \u03b1/\u03b2 totient-ratio bounds -> TailAlphaBetaEnough p",
+  "sanity_script_exit": 0
+}

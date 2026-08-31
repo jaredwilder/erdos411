@@ -1,0 +1,9 @@
+{
+  "README.md": "a9cd8123292af458df8cb3bbd425cff876259b37e06b704a0306dccb7dfd4c18",
+  "data/alpha_beta_scan_k1_200.json": "600547b06e8fdd0cae958c6f1600a7290e88352b51aeeaa6064b5bfd507b1a6f",
+  "docs/PHASE3_VERDICT_RS_PRODUCT_NOT_ENOUGH.md": "c34eb5154a7c9267cc9e5c205a03e2264ed95e4879b7291461dd385fadab5839",
+  "docs/PHASE4_FIXED_MISSION_STRUCTURAL_C2_TAIL.md": "8ac0d37c4213a1d5eaeb69b7e1c04ce6be0f7da51f6fc588e6d2c94765e1d547",
+  "lean/Phase3AlphaBetaObstruction.lean": "87280a2b9d2070c5fb4e158e39b3dbdd9289d245c2baa75917052879217e72df",
+  "receipts/PHASE3_VERDICT.json": "e5dd124b657a94205bbb08e7d6504e72725c196bd2f921b2f1bd197be3f91a2a",
+  "scripts/phase3_alpha_beta_scan.py": "19d191e2e7c16465fd9e37e89db518d283ccba333c5916198e787f8bc0cc9d31"
+}

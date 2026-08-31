@@ -1,0 +1,145 @@
+-- ORACLE VENDOR SHIM (2026-07-28) -- GENERATED, do not hand-edit.
+--
+-- WHY THIS EXISTS. Conjecture files do `import FormalConjecturesUtil`. That root pulls in style
+-- LINTER plugins that reference Mathlib linter options renamed since v4.27, plus a handful of
+-- ForMathlib modules that do not compile under Mathlib v4.29.1 (a deleted Mathlib module, a
+-- renamed lemma). One broken leaf took down the whole aggregator, so EVERY formal target failed.
+--
+-- This shim keeps what matters and drops only what cannot build:
+--   KEPT  : the real `answer( )` term elaborator (FormalConjecturesUtil.Answer) -- NOT a hand-rolled
+--           stand-in, so statements elaborate exactly as upstream intends
+--   KEPT  : every FormalConjecturesForMathlib module that compiles (real mathematics, e.g.
+--           SimpleGraph.chromaticCardinal, which Erdos #1175 depends on)
+--   DROPPED: style linters (zero bearing on whether a theorem is true)
+--   DROPPED: modules that genuinely fail under our Mathlib -- conjectures needing those still fail,
+--           individually and honestly, instead of taking the whole lane down with them.
+import Mathlib
+import FormalConjecturesUtil.Answer
+import FormalConjecturesForMathlib.Algebra.GCDMonoid.Finset
+import FormalConjecturesForMathlib.Algebra.Group.Action.Pointwise.Set.Basic
+import FormalConjecturesForMathlib.Algebra.Group.GrowthFunction
+import FormalConjecturesForMathlib.Algebra.Group.Indicator
+import FormalConjecturesForMathlib.Algebra.Order.Group.Pointwise.Interval
+import FormalConjecturesForMathlib.Algebra.Polynomial.Basic
+import FormalConjecturesForMathlib.Algebra.Polynomial.HasseDeriv
+import FormalConjecturesForMathlib.Algebra.Powerfree
+import FormalConjecturesForMathlib.Algebra.QuadraticAlgebra.Basic
+import FormalConjecturesForMathlib.Algebra.QuadraticAlgebra.Instances
+import FormalConjecturesForMathlib.AlgebraicGeometry.ProjectiveSpace
+import FormalConjecturesForMathlib.AlgebraicGeometry.VectorBundle
+import FormalConjecturesForMathlib.Analysis.Asymptotics.Basic
+import FormalConjecturesForMathlib.Analysis.Equidistribution.ModOne
+import FormalConjecturesForMathlib.Analysis.Fourier.SpectralSets
+import FormalConjecturesForMathlib.Analysis.HasGaps
+import FormalConjecturesForMathlib.Analysis.Matrix.Spectrum
+import FormalConjecturesForMathlib.Analysis.Real.Cardinality
+import FormalConjecturesForMathlib.Analysis.SpecialFunctions.AdditiveCharacter
+import FormalConjecturesForMathlib.Analysis.SpecialFunctions.Log.Basic
+import FormalConjecturesForMathlib.Analysis.SpecialFunctions.NthRoot
+import FormalConjecturesForMathlib.Combinatorics.AP.Basic
+import FormalConjecturesForMathlib.Combinatorics.Additive.Basis
+import FormalConjecturesForMathlib.Combinatorics.Additive.Convolution
+import FormalConjecturesForMathlib.Combinatorics.Additive.Coset
+import FormalConjecturesForMathlib.Combinatorics.Additive.DifferenceBasis
+import FormalConjecturesForMathlib.Combinatorics.Additive.RestrictedSumset
+import FormalConjecturesForMathlib.Combinatorics.Additive.VCDim
+import FormalConjecturesForMathlib.Combinatorics.Basic
+import FormalConjecturesForMathlib.Combinatorics.Hypergraph.ThreeUniform
+import FormalConjecturesForMathlib.Combinatorics.LatinSquare
+import FormalConjecturesForMathlib.Combinatorics.Ramsey
+import FormalConjecturesForMathlib.Combinatorics.Ramsey.Diagonal
+import FormalConjecturesForMathlib.Combinatorics.SetFamily.Sunflower
+import FormalConjecturesForMathlib.Combinatorics.SetFamily.VCDim
+import FormalConjecturesForMathlib.Combinatorics.SetTheory.PartitionRelation
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.AnnihilationNumber
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Balanced
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Circumference
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Clique
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Coloring
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.CompleteGraphEdgeCount
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Connectivity
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Cvetkovic
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Degrees
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.DiamExtra
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Domination
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.EdgeColouring
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.FractionalAlpha
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.HomDensity
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Independence
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Induced
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.LargestInducedTree
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.LovaszTheta
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Matching
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.PathCover
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Ramsey
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Residue
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.SizeRamsey
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.SpanningTree
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.SubgraphIsomorphism
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.Temperature
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.UnitDistancePlaneGraph
+import FormalConjecturesForMathlib.Combinatorics.SimpleGraph.WellTotallyDominated
+import FormalConjecturesForMathlib.Combinatorics.YoungDiagram
+import FormalConjecturesForMathlib.Computability.DFA
+import FormalConjecturesForMathlib.Computability.Encoding
+import FormalConjecturesForMathlib.Data.Finset.Card
+import FormalConjecturesForMathlib.Data.Finset.Powerset
+import FormalConjecturesForMathlib.Data.Finset.ReciprocalSum
+import FormalConjecturesForMathlib.Data.Int.IntermediateValue
+import FormalConjecturesForMathlib.Data.Nat.Factorization.Basic
+import FormalConjecturesForMathlib.Data.Nat.Full
+import FormalConjecturesForMathlib.Data.Nat.Init
+import FormalConjecturesForMathlib.Data.Nat.PerfectPower
+import FormalConjecturesForMathlib.Data.Nat.Prime.Composite
+import FormalConjecturesForMathlib.Data.Nat.Prime.Defs
+import FormalConjecturesForMathlib.Data.Nat.Prime.Finset
+import FormalConjecturesForMathlib.Data.Nat.Squarefree
+import FormalConjecturesForMathlib.Data.Real.Constants
+import FormalConjecturesForMathlib.Data.Real.NearestInt
+import FormalConjecturesForMathlib.Data.Set.Density
+import FormalConjecturesForMathlib.Data.Set.Interval
+import FormalConjecturesForMathlib.Data.Set.Triplewise
+import FormalConjecturesForMathlib.Data.ZMod.Fp
+import FormalConjecturesForMathlib.Data.ZMod.PerfectDifferenceSet
+import FormalConjecturesForMathlib.FieldTheory.MvRatFunc.Defs
+import FormalConjecturesForMathlib.Geometry.«3d»
+import FormalConjecturesForMathlib.Geometry.Euclidean
+import FormalConjecturesForMathlib.Geometry.Metric
+import FormalConjecturesForMathlib.Lean.Elab.InfoTree.Util
+import FormalConjecturesForMathlib.LinearAlgebra.AffineSpace.Simplex.Basic
+import FormalConjecturesForMathlib.LinearAlgebra.GeneralLinearGroup
+import FormalConjecturesForMathlib.LinearAlgebra.SpecialLinearGroup
+import FormalConjecturesForMathlib.Logic.Equiv.Fin.Rotate
+import FormalConjecturesForMathlib.NumberTheory.AdditivelyComplete
+import FormalConjecturesForMathlib.NumberTheory.Amicable
+import FormalConjecturesForMathlib.NumberTheory.BeurlingPrimes
+import FormalConjecturesForMathlib.NumberTheory.Carmichael
+import FormalConjecturesForMathlib.NumberTheory.CoveringSystem
+import FormalConjecturesForMathlib.NumberTheory.DirichletCharacter.Basic
+import FormalConjecturesForMathlib.NumberTheory.Divisors
+import FormalConjecturesForMathlib.NumberTheory.Lacunary
+import FormalConjecturesForMathlib.NumberTheory.LegendreSymbol.Basic
+import FormalConjecturesForMathlib.NumberTheory.NormalNumber
+import FormalConjecturesForMathlib.NumberTheory.NumberField.Quadratic
+import FormalConjecturesForMathlib.NumberTheory.PisotNumber
+import FormalConjecturesForMathlib.NumberTheory.PracticalNumbers
+import FormalConjecturesForMathlib.NumberTheory.PrimeGap
+import FormalConjecturesForMathlib.NumberTheory.Primitive
+import FormalConjecturesForMathlib.NumberTheory.SierpinskiNumber
+import FormalConjecturesForMathlib.NumberTheory.WallSunSunPrimes
+import FormalConjecturesForMathlib.Order.Filter.Cofinite
+import FormalConjecturesForMathlib.Order.Filter.atTopBot.Finset
+import FormalConjecturesForMathlib.Order.Interval.Finset.Basic
+import FormalConjecturesForMathlib.Order.Interval.Finset.Nat
+import FormalConjecturesForMathlib.Probability.FiniteMethod
+import FormalConjecturesForMathlib.SetTheory.Cardinal.Arithmetic
+import FormalConjecturesForMathlib.SetTheory.Cardinal.Continuum
+import FormalConjecturesForMathlib.SetTheory.Cardinal.SimpleGraph
+import FormalConjecturesForMathlib.Tactic.Linter.Term
+import FormalConjecturesForMathlib.Topology.Algebra.InfiniteSum.Group
+import FormalConjecturesForMathlib.Topology.Algebra.InfiniteSum.Order
+import FormalConjecturesForMathlib.Topology.Discrete
+import FormalConjecturesForMathlib.Topology.GDelta
+import FormalConjecturesForMathlib.Topology.Homogeneous
+import FormalConjecturesForMathlib.Topology.LebesgueCoveringDimension
+import FormalConjecturesForMathlib.Topology.MetricSpace.MetricSeparated

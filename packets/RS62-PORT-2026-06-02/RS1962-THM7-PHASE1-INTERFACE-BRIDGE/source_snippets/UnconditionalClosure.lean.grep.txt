@@ -1,0 +1,42 @@
+31: - 126 below-R661Threshold records (x2 < 9849/10000): ALL have c3 ≥ 4p³
+54: The proof of `fastTotient_eq` is deferred below (Phase 2). The computation is
+55: tested first via `native_decide` in `cambie_depth3_check_finite`. -/
+316: theorem fastTotient_eq (n : ℕ) : fastTotient n = n.totient := by
+381:     (h_overshoot : 4 * p ^ 3 ≤ stepQ p c2 phic2) :
+384:   have h4p3_pos : (0 : Rat) < 4 * p ^ 3 := by positivity
+386:   calc (9849 : Rat) / 10000 * (4 * p ^ 3)
+387:       ≤ 1 * (4 * p ^ 3) := by nlinarith [show (0 : Rat) < 4 * p ^ 3 from h4p3_pos]
+388:     _ = 4 * p ^ 3        := one_mul _
+396: def cambie_depth3_check (p : ℕ) : Bool :=
+400:   -- Fast exit for above-threshold: c2 * 10000 ≥ 9849 * 4 * p²
+401:   if 9849 * (4 * p ^ 2) ≤ c2 * 10000 then true
+406:     decide (4 * p ^ 3 ≤ c3)
+410: Uses native_decide to verify cambie_depth3_check for all primes p ≡ 7 (mod 8) in [7, P₀].
+419: private theorem cambie_depth3_check_finset :
+422:     cambie_depth3_check p = true := by native_decide
+426: theorem cambie_depth3_check_finite :
+428:     cambie_depth3_check p = true := by
+430:   exact cambie_depth3_check_finset p (Finset.mem_range.mpr (by omega))
+434: /-- The cambie_depth3_check passing implies the actual closure Left branch.
+437:     (p : ℕ) (hp : cambie_depth3_check p = true)
+456:   -- cambie_depth3_check uses fastTotient; rewrite to Nat.totient via fastTotient_eq
+457:   simp only [cambie_depth3_check, fastTotient_eq] at hp
+461:     -- hA : 9849 * (4 * p ^ 2) ≤ c2_expanded * 10000  (definitionally c2 * 10000)
+465:     have hA_rat : (9849 : Rat) * (4 * (p : Rat) ^ 2) ≤ (c2 : Rat) * 10000 := by
+466:       exact_mod_cast (show 9849 * (4 * p ^ 2) ≤ c2 * 10000 from hA)
+472:     -- hp : decide (4 * p ^ 3 ≤ p * c2_expanded + (p-1) * phi_c2_expanded) = true
+473:     have hc3 : 4 * p ^ 3 ≤ p * c2 + (p - 1) * phi_c2 := decide_eq_true_eq.mp hp
+507: `cambie_depth3_check p` evaluates to `true`. This follows by RS-62 Theorem 7
+538: axiom rosser_schoenfeld_1962_thm7_cambie :
+540:     cambie_depth3_check p = true
+543: `rosser_schoenfeld_1962_thm7_cambie`. -/
+544: theorem cambie_depth3_check_asymptotic :
+546:     cambie_depth3_check p = true :=
+547:   rosser_schoenfeld_1962_thm7_cambie
+560: **Axiom set:** `{propext, Classical.choice, Quot.sound, rosser_schoenfeld_1962_thm7_cambie}`
+562: The single non-logical axiom `rosser_schoenfeld_1962_thm7_cambie` is the
+591:   · -- Finite case: cambie_depth3_check verified
+592:     have hcheck : cambie_depth3_check p = true :=
+593:       cambie_depth3_check_finite p hp_le hp_prime hp_mod hp_ge_7
+597:     have hcheck : cambie_depth3_check p = true :=
+598:       cambie_depth3_check_asymptotic p hp_le hp_prime hp_mod hp_ge_7

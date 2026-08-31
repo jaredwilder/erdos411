@@ -1,0 +1,9 @@
+{
+  "README.md": "73fcc8887de5dbde252e36667093a1ecbc864e4b91c79405b66bbb469da2d6da",
+  "docs/PHASE4_STRUCTURAL_C2_TAIL_REPORT.md": "54af39b78e18d92f8a3347a65b72fabc4b69d716d3a6c1db6a528f121c974f2f",
+  "docs/PHASE5_FIXED_CLOSE_MISSION.md": "1b33ae9c5f54bd376081b02467270d8518ee036061cc6fa87742d6df28b3d294",
+  "lean/StructuralC2SquarefreeExclusion.lean": "56dfce4909d3ad0c81ce9a5f871f83e5a1e4678d8dff41312f4513c75a4697d8",
+  "receipts/PHASE4_RECEIPT.json": "e585cafa3f8fb5f22ee08ec299fc761f49f071e4d30a2aa8012cab258eb9cf69",
+  "receipts/phase4_structural_c2_verify_1e6.json": "4f55b4f2d64f334b9689d9131d4bc36f39e7b9e54d3cf6723f57a694b225bb56",
+  "scripts/phase4_structural_c2_verify.py": "a91cb27dc30eae1e41172a8459c6814d8b9c3ed2f07130065530d38f3d8867b4"
+}

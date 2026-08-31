@@ -1,0 +1,6 @@
+{"P": [5, 7, 37, 2089, 3499], "s": 137879, "t": 1485864509, "s_prime": false, "t_prime": true, "s_gt_mx": true, "chain_ok": true}
+{"P": [5, 7, 37, 1297, 1996949], "s": 10577675, "t": 13970559319, "s_prime": false, "t_prime": false, "s_gt_mx": true, "chain_ok": true}
+{"P": [5, 7, 37, 1297, 1788827], "s": 40612313, "t": 85283659, "s_prime": false, "t_prime": true, "s_gt_mx": true, "chain_ok": true}
+{"P": [5, 7, 37, 1297, 1681003], "s": 2035645259, "t": 2712371481306857, "s_prime": true, "t_prime": false, "s_gt_mx": true, "chain_ok": true}
+{"P": [5, 7, 37, 1297, 1679963], "s": 8134222633, "t": 25958253408155, "s_prime": true, "t_prime": false, "s_gt_mx": true, "chain_ok": true}
+{"P": [5, 7, 37, 1297, 1679633], "s": 165949222603, "t": 159294132600420170675, "s_prime": false, "t_prime": false, "s_gt_mx": true, "chain_ok": true}

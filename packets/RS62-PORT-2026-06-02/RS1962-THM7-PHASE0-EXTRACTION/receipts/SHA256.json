@@ -1,0 +1,15 @@
+{
+  "README.md": "16f008b82ed8b30e6e85d1d2ab0d05bcc12b25b8a118892f51da77fdd841857c",
+  "docs/CAMBIE_DEPTH3_REQUIRED_INEQUALITY.md": "ba68e5bbb9c92855bbb83f6f2003ef13bab525f314ac330b18708a4a660cbb3d",
+  "docs/PHASE0_AUDIT_THEOREM_NUMBER_MISMATCH.md": "52efdb84c6f53c546f2621fc0e31b95de6ee7915246d20e47ff9c53d2d84511c",
+  "docs/RS1962_THEOREM7_EXACT_STATEMENT.md": "82219b45c9384340cba672451d51afb980fdb31b59f49f1f5d40927b730d9e9d",
+  "lean/CambieDepth3BridgeTarget.lean": "bbe890d3ab21f4fd25db6ab0803d720e235d04cfbc56b35901bbd760f0934e74",
+  "lean/RS1962Theorem7Interface.lean": "8fd32db7cf881400e861f0a29efdfbdb65afbfb518736f197bc6f6e380c5ad7a",
+  "receipts/PHASE0_RECEIPT.json": "47e9f170e0db5eef40bf04ed1e8b46a703aebb902a9caf9cb250f622976c58fa",
+  "scripts/phase0_extract_eg411.py": "3625ec88aeff74fe065c14a83a82952c68d6e1defd9428d33ea58f2849a4354c",
+  "source_snippets/CambieDepth3MertensRequirement.lean.grep.txt": "45b1cf351fa333f5d7c5dc5dde63bcc8e381e0792d1d5b02b049a6524747ffb9",
+  "source_snippets/OmegaProductBound.lean.grep.txt": "2bd25bc409a505bf9f1d1ca91b2c6c67a7a4d55d8ffb688bc7d33cf4fecc6ee1",
+  "source_snippets/UnconditionalClosure.lean.grep.txt": "62eeb282a36f46e51960ab3b744967d2543721cf7521e332707fa233518834c7",
+  "source_snippets/cambie_depth3_check.block.txt": "41df724bd87e26e8f9f2df3afd5101c0d928aa7c524ca18d103e29b6957a17b9",
+  "source_snippets/rs_axiom.block.txt": "fd0dcca3d1ff6896b45247d75d9020e9f608124fef26f96d7218e17f78f8aa2d"
+}

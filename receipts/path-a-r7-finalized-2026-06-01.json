@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "run-real-oracle-finalized-v1",
+  "label": "run-real-oracle-2026-06-01T20-22-10-916Z",
+  "brief": "Scan FULL cambie_depth3_check (level-1 short-circuit OR level-2 depth-3 fallback) for ALL primes p ≡ 7 mod 8 in range 1000000000 < p ≤ 10000000000 (the (10^9, 10^10] range — approximately 100 million primes). For each prime compute N=(3p-1)/4, phi_N=eulerphi(N), c2=3p^2-p+2(p-1)*phi_N, r1=c2/(4p^2); if r1>=0.9849 prime passes level 1; else compute c3=p*c2+(p-1)*eulerphi(c2) and r2=c3/(4p^3), prime passes if r2>=1. Report (a) total prime count CT, (b) L1FAILS, (c) AXFAILS (level-1 AND level-2 fail), (d) worst-margin prime P3MIN with R3MIN=c3/(4p^3), (e) margin above 1. Predicted: zero axiom failures with min c3/(4p^3) > 1.20 per axiom comment growth law and R5' confirmation at (10^8, 10^9] with min 1.21066.",
+  "totalRounds": 1,
+  "totalLlmCalls": 1,
+  "totalAutofires": 1,
+  "firedLocally": 1,
+  "queuedForWorker": 0,
+  "skipped": 0,
+  "errored": 0,
+  "runRoot": "C:\\Users\\jared\\Local Sites\\woocommerce-enterprise\\oracle\\use-case-runs\\run-real-oracle-2026-06-01T20-22-10-916Z",
+  "rounds": [
+    {
+      "round": 1,
+      "claimText": "For the residue class p ≡ 7 mod 8 in the range 1000000000 < p ≤ 10000000000 (approximately 100 million primes), the FULL cambie_depth3_check (level-1 short-circuit OR level-2 depth-3 fallback) holds with zero axiom failures and minimum c3/(4p^3) ratio expected to exceed 1.20 (matching the axiom comment growth law from UnconditionalClosure.lean line 530 and confirmed at (10^8, 10^9] in R5' with min 1.21066), testable in PARI as: default(realprecision,30); R3MIN=100.0; P3MIN=0; AXFAILS=0; L1FAILS=0; CT=0; start_wall=getwalltime(); forprime(p=1000000001,10000000000,if(p%8==7,CT=CT+1;N=(3*p-1)/4;phi_N=eulerphi(N);c2=3*p^2-p+2*(p-1)*phi_N;r1=c2*1.0/(4*p^2);if(r1<0.9849,L1FAILS=L1FAILS+1;c3=p*c2+(p-1)*eulerphi(c2);r2=c3*1.0/(4*p^3);if(r2<1.0,AXFAILS=AXFAILS+1;print(\"AXIOM_FAIL p=\",p,\" r1=\",r1,\" r2=\",r2));if(r2<R3MIN,R3MIN=r2;P3MIN=p)))); print(\"CT=\",CT,\" L1FAILS=\",L1FAILS,\" AXFAILS=\",AXFAILS,\" P3MIN=\",P3MIN,\" R3MIN=\",R3MIN,\" margin=\",R3MIN-1.0,\" elapsed_s=\",(getwalltime()-start_wall)/1000); quit.",
+      "recommendation": {
+        "schemaVersion": "oracle-tool-recommendation-v1",
+        "generatedAt": "2026-06-01T20:22:35.255Z",
+        "claimId": "run-real-oracle-2026-06-01T20-22-10-916Z-r1",
+        "obligation": {
+          "kind": "analytic_numeric",
+          "confidence": 0.8999999999999999,
+          "matchedSignals": [
+            "\\barithmetic progression\\b|\\bresidue class\\b",
+            "\\btotient\\b|\\beulerphi\\b|\\bfastTotient\\b",
+            "\\bforprime\\b|\\bisprime\\b"
+          ],
+          "requiredReadiness": "T4_ARTIFACT_CLEAN",
+          "targetPromotionCeiling": "CERT_NUMERIC"
+        },
+        "rankedTools": [
+          {
+            "toolId": "arb",
+            "label": "Arb",
+            "rank": 1,
+            "role": "primary",
+            "purpose": "Replace floating numerics with rigorous interval/ball arithmetic artifacts.",
+            "promotionCeiling": "CERT_NUMERIC",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_FLINT_ARB"
+          },
+          {
+            "toolId": "flint",
+            "label": "FLINT",
+            "rank": 2,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "CERT_FINITE",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:flint-config"
+            ],
+            "envFlag": "ORACLE_TOOL_FLINT_ARB"
+          },
+          {
+            "toolId": "sagemath",
+            "label": "SageMath",
+            "rank": 3,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "COMP",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:sage"
+            ],
+            "envFlag": "ORACLE_TOOL_SAGE"
+          },
+          {
+            "toolId": "pari-gp",
+            "label": "PARI/GP",
+            "rank": 4,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "COMP",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_PARIGP"
+          },
+          {
+            "toolId": "python",
+            "label": "Python",
+            "rank": 5,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "COMP",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_PYTHON"
+          }
+        ],
+        "executionPlan": [
+          {
+            "phase": 1,
+            "toolIds": [
+              "arb"
+            ],
+            "purpose": "Replace floating numerics with rigorous interval/ball arithmetic artifacts.",
+            "expectedArtifact": "tool_run.json + stdout/stderr + parsed_output.json",
+            "promotionCeiling": "CERT_NUMERIC"
+          },
+          {
+            "phase": 2,
+            "toolIds": [
+              "flint",
+              "sagemath",
+              "pari-gp",
+              "python"
+            ],
+            "purpose": "Cross-check the primary result independently.",
+            "expectedArtifact": "cross_check_tool_run.json",
+            "promotionCeiling": "CERT_NUMERIC"
+          }
+        ],
+        "blockers": [],
+        "notes": [
+          "Tool recommendations do not prove claims. They define the artifact path required before promotion.",
+          "Promotion ceilings remain enforced by the supporting tool-run artifacts."
+        ]
+      },
+      "autofireOutcome": {
+        "status": "fired_locally",
+        "toolRunId": "autofire-2026-06-01T202235477Z-arb-b559a054",
+        "toolId": "arb",
+        "artifactPath": "C:\\Users\\jared\\Local Sites\\woocommerce-enterprise\\UNIVERSAL_LAW\\oracle\\data-locker\\tool-runs\\arb\\autofire-2026-06-01t202235477z-arb-b559a054"
+      }
+    }
+  ],
+  "finalizedAt": "2026-06-01T20:28:40.290Z"
+}

@@ -1,0 +1,25 @@
+/* R3 VERIFICATION: P_7(10^9) bound from L(s, chi_8) */
+default(realprecision, 30);
+X = 10^9;
+P7 = 1.0;
+ct = 0;
+forprime(p = 7, X, if(p % 8 == 7, P7 = P7 * (1 - 1.0/p); ct = ct + 1));
+print("R3: P_7(x) for x = ", X);
+print("  prime count (p == 7 mod 8, 7 <= p <= x): ", ct);
+print("  P_7(x) actual = ", P7);
+gam = Euler;
+lx = log(X*1.0);
+fac1 = (exp(-gam) / lx)^(1.0/4);
+fac2 = 1 - 1.0/(2 * lx^2);
+bnd = fac1 * fac2;
+print("  exp(-gamma) = ", exp(-gam));
+print("  log(x) = ", lx);
+print("  (exp(-gamma)/log(x))^(1/4) = ", fac1);
+print("  1 - 1/(2 log^2 x) = ", fac2);
+print("  claimed lower bound = ", bnd);
+print("  actual >= bound: ", P7 >= bnd);
+print("  actual / bound = ", P7 / bnd);
+print("  slack (actual - bound): ", P7 - bnd);
+print("  R1 slack ref at x=10^6: 0.125782 (28%)");
+print("  R3 slack at x=10^9: ", P7 - bnd, " (", 100*(P7-bnd)/bnd, "%)");
+quit;

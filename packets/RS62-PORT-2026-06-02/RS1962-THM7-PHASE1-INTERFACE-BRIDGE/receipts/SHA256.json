@@ -1,0 +1,13 @@
+{
+  "README.md": "90d5b9c0246562caf11d66a49d975c70d46b1b0eef4b7ff3930279bce4458fea",
+  "docs/PHASE1_EXECUTION_REPORT.md": "b7c9ab090803bae692e8cd3d4e0b9b406b8ceb7abf748872168dc872a8774325",
+  "lean/CambieBooleanBranchBridge.lean": "75fb5d0afbc290aeb7f3cd36bd9f19e2135bf1a269b6be00cd94214474e3d819",
+  "lean/RS1962ProductInterface.lean": "b9f73259ca322e968116a883a0288b8912d59eb6e9af71acf10571df6a65fbec",
+  "lean/RSProductToCambieBranchTarget.lean": "4053f83e71efd7252feb4b7f4d5420d750d7c5b343aee69a04c42e1377020e39",
+  "patches/CORRECT_RS1962_THEOREM7_COMMENTS.md": "851105f038b9489b80a067a2d404cd6da2c2c09b04922276b0206d91cad2a2f0",
+  "receipts/PHASE1_RECEIPT.json": "0f85a3996a45c61399d7e5ffcb303380e3ae40fe90c2bbb5c717582ceebfebee",
+  "source_snippets/CambieAxiomKillFinal.lean.grep.txt": "216ed3b860703db19e71cfb56a28193bcfe3747dc93a268a7209eb87fde90b07",
+  "source_snippets/CambieAxiomKillTactic.lean.grep.txt": "a760211b2c885e2bb27467f9e11105fd8465259a59b1a492f1946f3cb4afb481",
+  "source_snippets/OmegaProductBound.lean.grep.txt": "962518fd8f778d017b1f9155631ac26de60c87eb0b879f92d78077b8a7122edd",
+  "source_snippets/UnconditionalClosure.lean.grep.txt": "3cc23e49e9f4e94bc9baed5db24ba5224346f40bc9b2e1a2fbb66fa973d01697"
+}

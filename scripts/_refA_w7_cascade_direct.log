@@ -1,0 +1,23 @@
+[phase1] j3-nodes=657 internal_branches=726 chain_pruned=426 t=0.0s
+[phase2] terminal jobs=108922 t=0.2s
+  [20/364] terminals=6000 direct=6000 divisor=0 sols=0 t=21.1s
+  [40/364] terminals=12000 direct=12000 divisor=0 sols=0 t=35.1s
+  [60/364] terminals=18000 direct=18000 divisor=0 sols=0 t=50.8s
+  [80/364] terminals=24000 direct=24000 divisor=0 sols=0 t=66.9s
+  [100/364] terminals=30000 direct=30000 divisor=0 sols=0 t=88.1s
+  [120/364] terminals=36000 direct=36000 divisor=0 sols=0 t=99.8s
+  [140/364] terminals=42000 direct=42000 divisor=0 sols=0 t=116.1s
+  [160/364] terminals=48000 direct=48000 divisor=0 sols=0 t=137.8s
+  [180/364] terminals=54000 direct=54000 divisor=0 sols=0 t=162.5s
+  [200/364] terminals=59722 direct=59722 divisor=0 sols=0 t=176.0s
+  [220/364] terminals=65722 direct=65722 divisor=0 sols=0 t=199.2s
+  [240/364] terminals=71722 direct=71722 divisor=0 sols=0 t=219.9s
+  [260/364] terminals=77722 direct=77722 divisor=0 sols=0 t=233.8s
+  [280/364] terminals=83722 direct=83722 divisor=0 sols=0 t=249.8s
+  [300/364] terminals=89722 direct=89722 divisor=0 sols=0 t=264.6s
+  [320/364] terminals=95722 direct=95722 divisor=0 sols=0 t=280.2s
+  [340/364] terminals=101722 direct=101722 divisor=0 sols=0 t=296.5s
+  [360/364] terminals=107722 direct=107722 divisor=0 sols=0 t=320.4s
+  [364/364] terminals=108922 direct=108922 divisor=0 sols=0 t=323.6s
+{"omega": 7, "elapsed_sec": 323.6, "j3_nodes": 1, "jobs": 108922, "counters": {"terminals": 108922, "empty_window": 0, "direct": 108922, "divisor": 0, "direct_primes": 17959666565, "direct_cells": 279683881853, "max_direct_window": 5999901, "dual_audits": 0, "dual_mismatch": 0, "chain_pruned_internal": 426, "internal_branches": 726, "chain_pruned_p5": 88037}}
+SOLUTIONS: []

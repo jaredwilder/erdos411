@@ -1,0 +1,7 @@
+import EG411Formal.OmegaCapstone
+
+#print axioms EG411Capstone.solution_omega_le_five_classified
+#print axioms EG411Capstone.exceptional_high_omega_six
+#print axioms EG411Capstone.eg411_r2_conditional_closure_sharp5
+#print axioms EG411Capstone.weak_implies_weak5
+#print axioms EG411Capstone.weak5_implies_conjecture

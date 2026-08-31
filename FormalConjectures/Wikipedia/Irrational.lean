@@ -1,0 +1,104 @@
+/-
+Copyright 2025 The Formal Conjectures Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-/
+
+import FormalConjecturesShim
+
+/-!
+# Open questions on irrationality of numbers
+
+*Reference:* [Wikipedia](https://en.wikipedia.org/wiki/Irrational_number#Open_questions)
+-/
+
+open Real
+
+local notation "e" => exp 1
+
+-- See also corresponding transcendence conjectures
+-- in `FormalConjectures.Wikipedia.SchanuelsConjecture`
+
+namespace Irrational
+
+/-- Are $e$ and $\pi$ algebraically independent? -/
+
+theorem algebraicIndependent_e_pi :
+    answer(sorry) ↔ AlgebraicIndependent ℚ ![e, π] := by
+  sorry
+
+/--
+Is $e + \pi$ irrational?
+-/
+
+theorem irrational_e_plus_pi :
+    answer(sorry) ↔ Irrational (e + π) := by
+  sorry
+
+/--
+Is $e \pi$ irrational?
+-/
+
+theorem irrational_e_times_pi :
+    answer(sorry) ↔ Irrational (e * π) := by
+  sorry
+
+/--
+Is $e ^ e$ irrational?
+-/
+
+theorem irrational_e_to_e :
+    answer(sorry) ↔ Irrational (e ^ e) := by
+  sorry
+
+/--
+Is $\pi ^ e$ irrational?
+-/
+
+theorem irrational_pi_to_e :
+    answer(sorry) ↔ Irrational (π ^ e) := by
+  sorry
+
+/--
+Is $\pi ^ \pi$ irrational?
+-/
+
+theorem irrational_pi_to_pi :
+    answer(sorry) ↔ Irrational (π ^ π) := by
+  sorry
+
+/--
+Is $\ln(\pi)$ irrational?
+-/
+
+theorem irrational_ln_pi :
+    answer(sorry) ↔ Irrational (log π) := by
+  sorry
+
+/--
+Is the Euler-Mascheroni constant $\gamma$ irrational?
+-/
+
+theorem irrational_eulerMascheroniConstant :
+    answer(sorry) ↔ Irrational eulerMascheroniConstant := by
+  sorry
+
+/--
+Is the Catalan constant $$G = \sum_{n=0}^∞ (-1)^n / (2n + 1)^2 \approx 0.91596$$ irrational?
+-/
+
+theorem irrational_catalanConstant :
+    answer(sorry) ↔ Irrational catalanConstant := by
+  sorry
+
+end Irrational

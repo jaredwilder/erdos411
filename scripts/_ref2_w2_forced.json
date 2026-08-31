@@ -1,0 +1,1 @@
+{"summary": {"omega": 2, "elapsed_sec": 0.0, "terminals": 1, "branches": 0, "max_scan": 4, "pruned_chain": 0, "solutions": [[5, 7]]}, "tree": {"P": [], "A": 3, "B": 2, "j": 2, "kill": "terminal", "K": 8, "s_hi": 7, "found": [[5, 7]], "mode": "divisor", "K_factors": {"2": 3}}}

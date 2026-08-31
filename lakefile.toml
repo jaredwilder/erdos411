@@ -1,0 +1,48 @@
+name = "EG411Formal"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["EG411Formal"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.29.1"
+
+[[lean_lib]]
+name = "EG411Formal"
+# The APX-031 semantic certificate compares a 16,446-clause proposition.
+# This is elaboration stack only; it does not change kernel trust or theorem axioms.
+weakLeanArgs = ["--tstack=262144"]
+
+# Vendored from google-deepmind/formal-conjectures so their statement files ELABORATE here.
+# Without these, `lean_bridge` stripped `import FormalConjecturesUtil` and substituted Mathlib,
+# which drops the `answer( )` term elaborator AND the real mathematics in
+# FormalConjecturesForMathlib (e.g. `SimpleGraph.chromaticCardinal`, used by Erdos #1175).
+# `defaultTargets` is deliberately left as EG411Formal alone: our own proofs must not start
+# depending on a vendored third-party tree, and `lake build EG411Formal` stays unchanged.
+[[lean_lib]]
+name = "FormalConjecturesUtil"
+# OUR house style linters must not be applied to a VENDORED third-party tree. With
+# `weak.linter.mathlibStandardSet` on, their files fail on docString/missingEnd STYLE rules --
+# which says nothing about the mathematics and would block the whole formal lane. Disabling a
+# style linter on someone else's source is not weakening a proof: the kernel still checks
+# every theorem, and the axiom-footprint gate in lean_bridge is untouched.
+leanOptions = { weak.linter.mathlibStandardSet = false, weak.linter.style.docString = false, weak.linter.style.missingEnd = false, weak.linter.style.longLine = false, relaxedAutoImplicit = true }
+
+[[lean_lib]]
+name = "FormalConjecturesForMathlib"
+leanOptions = { weak.linter.mathlibStandardSet = false, weak.linter.style.docString = false, weak.linter.style.missingEnd = false, weak.linter.style.longLine = false, relaxedAutoImplicit = true }
+
+[[lean_lib]]
+name = "FormalConjecturesShim"
+leanOptions = { weak.linter.mathlibStandardSet = false, relaxedAutoImplicit = true }
+
+[[lean_lib]]
+name = "FormalConjectures"
+leanOptions = { weak.linter.mathlibStandardSet = false, relaxedAutoImplicit = true }

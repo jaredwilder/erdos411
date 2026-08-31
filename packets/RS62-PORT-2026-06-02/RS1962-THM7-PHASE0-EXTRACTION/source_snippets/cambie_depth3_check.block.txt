@@ -1,0 +1,100 @@
+376:     This is the key lemma for the finite verification: every concrete Cambie
+377:     candidate with c3 ≥ 4p³ closes at depth 3 unconditionally. -/
+378: theorem left_branch_from_depth3_overshoot
+379:     {p c2 phic2 : Rat}
+380:     (hp_pos : 0 < p)
+381:     (h_overshoot : 4 * p ^ 3 ≤ stepQ p c2 phic2) :
+382:     R661Threshold ≤ x3Q p (stepQ p c2 phic2) := by
+383:   unfold x3Q R661Threshold
+384:   have h4p3_pos : (0 : Rat) < 4 * p ^ 3 := by positivity
+385:   rw [le_div_iff₀ h4p3_pos]
+386:   calc (9849 : Rat) / 10000 * (4 * p ^ 3)
+387:       ≤ 1 * (4 * p ^ 3) := by nlinarith [show (0 : Rat) < 4 * p ^ 3 from h4p3_pos]
+388:     _ = 4 * p ^ 3        := one_mul _
+389:     _ ≤ stepQ p c2 phic2 := h_overshoot
+390: 
+391: /-! ## Finite verification decision procedure -/
+392: 
+393: /-- Decidable Boolean check for Cambie depth-3 closure at prime p.
+394:     Uses fastTotient for stack-safe O(√c2) computation in native code.
+395:     Returns true iff the Cambie record for p closes at depth 3 OR is above-threshold. -/
+396: def cambie_depth3_check (p : ℕ) : Bool :=
+397:   let N      := (3 * p - 1) / 4
+398:   let phi_N  := fastTotient N
+399:   let c2     := 3 * p ^ 2 - p + 2 * (p - 1) * phi_N
+400:   -- Fast exit for above-threshold: c2 * 10000 ≥ 9849 * 4 * p²
+401:   if 9849 * (4 * p ^ 2) ≤ c2 * 10000 then true
+402:   else
+403:     -- Below-threshold: check c3 ≥ 4p³ (depth-3 overshoot)
+404:     let phi_c2 := fastTotient c2
+405:     let c3     := p * c2 + (p - 1) * phi_c2
+406:     decide (4 * p ^ 3 ≤ c3)
+407: 
+408: /-! ## TASK C.2: Finite verification for p ≤ P₀ = 1,000,000
+409: 
+410: Uses native_decide to verify cambie_depth3_check for all primes p ≡ 7 (mod 8) in [7, P₀].
+411: Backed by PARI/GP R651 audit (0 failures found).
+412: 
+413: The computation: for each of 19,669 primes p ≡ 7 (mod 8) with p ≤ 10^6,
+414: fastTotient factorizes N = (3p-1)/4 (≤750K, fast) and, for the 126
+415: below-threshold cases, c2 (≤ 4×10^12, ~2ms via trial division to √c2 ≈ 2×10^6).
+416: Total estimated native runtime: <30s. -/
+417: 
+418: /-- Auxiliary: the finite check phrased over Finset for decidability. -/
+419: private theorem cambie_depth3_check_finset :
+420:     ∀ p ∈ Finset.range 1000001,
+421:     Nat.Prime p → p % 8 = 7 → 7 ≤ p →
+422:     cambie_depth3_check p = true := by native_decide
+423: 
+424: /-- **Finite closure (TASK C.2):** for all primes p ≡ 7 (mod 8) with 7 ≤ p ≤ 1,000,000,
+425:     the Cambie depth-3 check passes. -/
+426: theorem cambie_depth3_check_finite :
+427:     ∀ p : ℕ, p ≤ 1000000 → Nat.Prime p → p % 8 = 7 → 7 ≤ p →
+428:     cambie_depth3_check p = true := by
+429:   intro p hp
+430:   exact cambie_depth3_check_finset p (Finset.mem_range.mpr (by omega))
+431: 
+432: /-! ## Connecting the check to the rational closure conclusion -/
+433: 
+434: /-- The cambie_depth3_check passing implies the actual closure Left branch.
+435:     Bridges the ℕ-level decision procedure to the ℚ-level closure theorem. -/
+436: theorem cambie_check_implies_closure
+437:     (p : ℕ) (hp : cambie_depth3_check p = true)
+438:     (hp_pos : (0 : Rat) < p) :
+439:     let crec   := cambieRecord p
+440:     let pR     := (p : Rat)
+441:     let c2R    := (crec.2.1 : Rat)
+442:     let phi2R  := (crec.2.2.1 : Rat)
+443:     R661Threshold ≤ x3Q pR (stepQ pR c2R phi2R) := by
+444:   -- Reduce the let-bindings: goal is
+445:   --   R661Threshold ≤ x3Q p (stepQ p (cambieRecord p).2.1 (cambieRecord p).2.2.1)
+446:   -- Apply the @[simp] projection lemmas to inline the cambieRecord components
+447:   simp only [cambieRecord_c2, cambieRecord_phi_c2]
+448:   -- Name the concrete ℕ values matching cambieRecord's formula
+449:   set N      := (3 * p - 1) / 4 with hN_def
+450:   set phi_N  := Nat.totient N    with hphi_N_def
+451:   set c2     := 3 * p ^ 2 - p + 2 * (p - 1) * phi_N  with hc2_def
+452:   set phi_c2 := Nat.totient c2   with hphi_c2_def
+453:   -- Natural number facts used in both branches
+454:   have h_nat_pos : 0 < p := by exact_mod_cast hp_pos
+455:   have h1 : 1 ≤ p := h_nat_pos
+456:   -- cambie_depth3_check uses fastTotient; rewrite to Nat.totient via fastTotient_eq
+457:   simp only [cambie_depth3_check, fastTotient_eq] at hp
+458:   -- Split on the Bool if/else condition
+459:   split_ifs at hp with hA
+460:   · -- Case 1: above-threshold
+461:     -- hA : 9849 * (4 * p ^ 2) ≤ c2_expanded * 10000  (definitionally c2 * 10000)
+462:     have hone_le_p : (1 : Rat) ≤ (p : Rat) := by
+463:       have : 1 ≤ p := h1; exact_mod_cast this
+464:     -- Cast the ℕ inequality to ℚ
+465:     have hA_rat : (9849 : Rat) * (4 * (p : Rat) ^ 2) ≤ (c2 : Rat) * 10000 := by
+466:       exact_mod_cast (show 9849 * (4 * p ^ 2) ≤ c2 * 10000 from hA)
+467:     have hthr : R661Threshold * (4 * (p : Rat) ^ 2) ≤ (c2 : Rat) := by
+468:       unfold R661Threshold; nlinarith
+469:     exact above_threshold_depth3_closes hp_pos hone_le_p
+470:       (by exact_mod_cast Nat.zero_le c2) (by exact_mod_cast Nat.zero_le phi_c2) hthr
+471:   · -- Case 2: below-threshold; depth-3 overshoot c3 ≥ 4p³
+472:     -- hp : decide (4 * p ^ 3 ≤ p * c2_expanded + (p-1) * phi_c2_expanded) = true
+473:     have hc3 : 4 * p ^ 3 ≤ p * c2 + (p - 1) * phi_c2 := decide_eq_true_eq.mp hp
+474:     apply left_branch_from_depth3_overshoot hp_pos
+475:     unfold stepQ

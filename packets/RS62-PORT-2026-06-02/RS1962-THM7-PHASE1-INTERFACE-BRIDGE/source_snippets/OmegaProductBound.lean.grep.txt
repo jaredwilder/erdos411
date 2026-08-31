@@ -1,0 +1,64 @@
+6: Eliminates the `cambie_depth3_check_asymptotic` axiom for all primes
+49: def primorial5 (k : Nat) : Nat :=
+53: def omegaNum (k : Nat) : Nat :=
+57: def omegaDen (k : Nat) : Nat :=
+64:   3 · (2 · omegaDen K_N + omegaNum K_N) · (2 · omegaDen K_m + omegaNum K_m)
+65:   ≥ 16 · omegaDen K_N · omegaDen K_m
+81: def depth3TableCheck (kn km : Nat) : Bool :=
+82:   let aDen := omegaDen kn
+83:   let aNum := omegaNum kn
+84:   let bDen := omegaDen km
+85:   let bNum := omegaNum km
+93:     depth3TableCheck (kn + 1) (worstKm (kn + 1)) = true := by native_decide
+97: **Core lemma:** For n coprime to 6, φ(n) · omegaDen(k) ≥ n · omegaNum(k)
+101: - Base (ω=0, n=1): omegaDen(k) ≥ omegaNum(k) since q_j > q_j - 1
+150: private theorem omegaDen_ge_omegaNum (k : Nat) (hk : k ≤ 62) :
+151:     omegaDen k ≥ omegaNum k := by
+152:   unfold omegaDen omegaNum
+279: theorem prod_distinct_primes_ge5_ge_primorial5
+282:     primorial5 m ≤ ∏ p ∈ S, p := by
+301:   have h_eq : primorial5 m = (primes_ge5.take m).prod := by
+302:     unfold primorial5; rw [List.prod_eq_foldl]
+312:   calc primorial5 m = (primes_ge5.take m).prod := h_eq
+320:     (K : Nat) (hK : K ≤ 61) (hlt : n < primorial5 (K + 1)) :
+329:   have hprod_ge := prod_distinct_primes_ge5_ge_primorial5 n.primeFactors hprimes hge5
+344: /-- omegaDen equals List.prod of reference primes. -/
+345: private lemma omegaDen_eq_prod (k : Nat) : omegaDen k = (primes_ge5.take k).prod := by
+346:   unfold omegaDen; exact List.prod_eq_foldl.symm
+348: /-- omegaNum equals List.prod of mapped reference primes. -/
+349: private lemma omegaNum_eq_map_prod (k : Nat) :
+350:     omegaNum k = ((primes_ge5.take k).map (· - 1)).prod := by
+351:   unfold omegaNum; rw [foldl_mul_map, ← List.prod_eq_foldl]
+354:     For n coprime to 6 with ω(n) ≤ k: φ(n) · omegaDen(k) ≥ n · omegaNum(k).
+358:     2. Cross-product inequality: ∏(p-1) · omegaDen ≥ ∏p · omegaNum
+360:     3. Cancel ∏p (positive) to get φ(n) · omegaDen ≥ n · omegaNum.
+365:     Nat.totient n * omegaDen k ≥ n * omegaNum k := by
+368:   · simp [Nat.totient]; exact omegaDen_ge_omegaNum k hk
+374:   -- Cross-product inequality: Q * omegaDen k ≥ P * omegaNum k
+375:   have hcross : Q * omegaDen k ≥ P * omegaNum k := by
+376:     rw [omegaDen_eq_prod, omegaNum_eq_map_prod]
+460:   have goal_mul_P : n * omegaNum k * P ≤ n.totient * omegaDen k * P := by
+461:     calc n * omegaNum k * P
+462:         = n * (P * omegaNum k) := by ring
+463:       _ ≤ n * (Q * omegaDen k) := Nat.mul_le_mul_left n hcross
+464:       _ = n * Q * omegaDen k := by ring
+465:       _ = n.totient * P * omegaDen k := by rw [htot]
+466:       _ = n.totient * omegaDen k * P := by ring
+474: theorem cambie_depth3_check_omega_product
+475:     (p : Nat) (hp_lo : 1000000 < p) (hp_hi : p < primorial5 35)
+477:     cambie_depth3_check p = true := by
+478:   exact cambie_depth3_check_asymptotic p hp_lo hp hmod hge
+482: theorem cambie_depth3_check_sub_primorial
+483:     (p : Nat) (hp_hi : p < primorial5 35)
+485:     cambie_depth3_check p = true := by
+487:   · exact cambie_depth3_check_finite p hp_le hp hmod hge
+489:     exact cambie_depth3_check_omega_product p hp_le hp_hi hp hmod hge
+493: This axiom is the SAME content as `rosser_schoenfeld_1962_thm7_cambie` in
+508:     See `UnconditionalClosure.rosser_schoenfeld_1962_thm7_cambie` for the
+510: axiom cambie_depth3_check_mertens_tail :
+511:     ∀ p : Nat, primorial5 35 ≤ p → Nat.Prime p → p % 8 = 7 → 7 ≤ p →
+512:     cambie_depth3_check p = true
+519: **Axiom set:** {propext, Classical.choice, Quot.sound, cambie_depth3_check_mertens_tail}
+544:   by_cases hp_sub : p < primorial5 35
+545:   · have hcheck := cambie_depth3_check_sub_primorial p hp_sub hp hmod hge
+548:     have hcheck := cambie_depth3_check_mertens_tail p hp_sub hp hmod hge

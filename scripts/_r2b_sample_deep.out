@@ -1,0 +1,35 @@
+sample=500 top50=50 union=550
+  ..25/550 t=3s {'audited': 25, 'window_scanned': 25, 'window_skipped_too_big': 0, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..50/550 t=4s {'audited': 50, 'window_scanned': 49, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..75/550 t=9s {'audited': 75, 'window_scanned': 74, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..100/550 t=13s {'audited': 100, 'window_scanned': 99, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..125/550 t=18s {'audited': 125, 'window_scanned': 124, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..150/550 t=22s {'audited': 150, 'window_scanned': 149, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..175/550 t=27s {'audited': 175, 'window_scanned': 174, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..200/550 t=32s {'audited': 200, 'window_scanned': 199, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..225/550 t=37s {'audited': 225, 'window_scanned': 224, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..250/550 t=43s {'audited': 250, 'window_scanned': 249, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..275/550 t=48s {'audited': 275, 'window_scanned': 274, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..300/550 t=55s {'audited': 300, 'window_scanned': 299, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..325/550 t=59s {'audited': 325, 'window_scanned': 324, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..350/550 t=65s {'audited': 350, 'window_scanned': 349, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..375/550 t=72s {'audited': 375, 'window_scanned': 374, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..400/550 t=78s {'audited': 400, 'window_scanned': 399, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..425/550 t=86s {'audited': 425, 'window_scanned': 424, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..450/550 t=96s {'audited': 450, 'window_scanned': 449, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..475/550 t=108s {'audited': 475, 'window_scanned': 474, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..500/550 t=127s {'audited': 500, 'window_scanned': 499, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..525/550 t=150s {'audited': 525, 'window_scanned': 524, 'window_skipped_too_big': 1, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+  ..550/550 t=160s {'audited': 550, 'window_scanned': 530, 'window_skipped_too_big': 20, 'stored_value_mismatch': 0, 'fact_mismatch': 0, 'eq_hits_window': 0, 'eq_hits_divisor': 0, 'neg_branch': 0, 'tree_disagree': 0}
+{
+ "audited": 550,
+ "window_scanned": 530,
+ "window_skipped_too_big": 20,
+ "stored_value_mismatch": 0,
+ "fact_mismatch": 0,
+ "eq_hits_window": 0,
+ "eq_hits_divisor": 0,
+ "neg_branch": 0,
+ "tree_disagree": 0
+}
+done in 160s

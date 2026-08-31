@@ -1,0 +1,27 @@
+6: Eliminates the `cambie_depth3_check_asymptotic` axiom for all primes
+13: **Layer 3:** residual axiom for p ≥ 5.9 × 10⁶⁰ (Mertens gap)
+139: private theorem foldl_mul_ge_foldl_sub (l : List Nat) (acc1 acc2 : Nat) (h : acc2 ≤ acc1) :
+140:     l.foldl (fun a q => a * (q - 1)) acc2 ≤ l.foldl (fun a q => a * q) acc1 := by
+141:   induction l generalizing acc1 acc2 with
+145:     exact ih (acc1 * hd) (acc2 * (hd - 1)) (by
+146:       calc acc2 * (hd - 1) ≤ acc2 * hd := Nat.mul_le_mul_left acc2 (Nat.sub_le hd 1)
+474: theorem cambie_depth3_check_omega_product
+477:     cambie_depth3_check p = true := by
+478:   exact cambie_depth3_check_asymptotic p hp_lo hp hmod hge
+482: theorem cambie_depth3_check_sub_primorial
+485:     cambie_depth3_check p = true := by
+487:   · exact cambie_depth3_check_finite p hp_le hp hmod hge
+489:     exact cambie_depth3_check_omega_product p hp_le hp_hi hp hmod hge
+493: This axiom is the SAME content as `rosser_schoenfeld_1962_thm7_cambie` in
+499:   Layer 3 (this axiom):              Mertens-Rosser-Schoenfeld tail for p ≥ primorial₅(35)
+508:     See `UnconditionalClosure.rosser_schoenfeld_1962_thm7_cambie` for the
+510: axiom cambie_depth3_check_mertens_tail :
+512:     cambie_depth3_check p = true
+519: **Axiom set:** {propext, Classical.choice, Quot.sound, cambie_depth3_check_mertens_tail}
+524: Mertens' third theorem (1874), proved repeatedly over 150 years
+525: (Mertens, Chebyshev, Rosser-Schoenfeld, Selberg-elementary, via PNT,
+538:     let c2R    := (crec.2.1 : Rat)
+541:     (R661Threshold ≤ x3Q pR (stepQ pR c2R phi2R)) ∨
+542:     (1 < stepQ pR (stepQ pR c2R phi2R) phi3R / (4 * pR ^ 4)) := by
+545:   · have hcheck := cambie_depth3_check_sub_primorial p hp_sub hp hmod hge
+548:     have hcheck := cambie_depth3_check_mertens_tail p hp_sub hp hmod hge

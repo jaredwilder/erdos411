@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-06-02T11:11:55.563898+00:00",
+  "phase": 1,
+  "delivered": [
+    "RS1962 product theorem interface",
+    "Cambie Boolean branch bridge",
+    "RS product -> Cambie branch target",
+    "comment correction patch",
+    "source inventory"
+  ],
+  "phase1_status": "Executed theorem-interface/bridge split. The actual RS product -> branch inequality is Phase 2.",
+  "old_axiom": "rosser_schoenfeld_1962_thm7_cambie : ... -> cambie_depth3_check p = true",
+  "new_missing_theorem": "rs_product_implies_cambie_branch_target : ... -> CambieBranchDisjunction p",
+  "branch_disjunction": {
+    "fast_exit": "9849 * (4 * p^2) <= c2(p) * 10000",
+    "depth3_overshoot": "4 * p^3 <= c3(p)"
+  },
+  "inventory": {
+    "CambieAxiomKillFinal.lean": {
+      "bytes": 4371,
+      "has_sorry": false,
+      "axiom_count": 5,
+      "theorem_count": 6,
+      "native_decide_count": 2
+    },
+    "CambieAxiomKillTactic.lean": {
+      "bytes": 7703,
+      "has_sorry": true,
+      "axiom_count": 4,
+      "theorem_count": 3,
+      "native_decide_count": 2
+    },
+    "OmegaProductBound.lean": {
+      "bytes": 26700,
+      "has_sorry": false,
+      "axiom_count": 11,
+      "theorem_count": 24,
+      "native_decide_count": 11
+    },
+    "CambieDepth3MertensRequirement.lean": {
+      "bytes": 3990,
+      "has_sorry": false,
+      "axiom_count": 0,
+      "theorem_count": 5,
+      "native_decide_count": 0
+    }
+  }
+}

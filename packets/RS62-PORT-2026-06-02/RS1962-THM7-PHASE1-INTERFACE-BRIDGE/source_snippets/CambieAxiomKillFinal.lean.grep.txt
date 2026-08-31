@@ -1,0 +1,22 @@
+13: THE GOAL: prove `cambie_depth3_check p = true` for p prime ≡ 7 mod 8, p > 10^6,
+14: p < primorial5(35), using ONLY:
+16:   - fastTotient_eq (UnconditionalClosure) — proven
+20: NO axiom invocation. The rosser_schoenfeld_1962_thm7_cambie axiom becomes
+24: 1. Unfold cambie_depth3_check
+25: 2. simp [fastTotient_eq] to rewrite fastTotient → Nat.totient
+26: 3. by_cases on the fast-exit condition `9849 * (4 * p^2) ≤ c2 * 10000`
+38:     Decidable (9849 * (4 * p^2) ≤ c2 * 10000) := inferInstance
+40: /-- THE KEY DECOMPOSITION: cambie_depth3_check p splits on fast-exit boundary.
+42: theorem cambie_depth3_check_split_structure
+47:     cambie_depth3_check p = (if 9849 * (4 * p^2) ≤ c2 * 10000 then true
+49:   unfold cambie_depth3_check
+54:     9849 * (4 * 1000039^2) ≤ (3 * 1000039^2 - 1000039 + 2 * (1000039 - 1) * Nat.totient ((3 * 1000039 - 1) / 4)) * 10000 := by
+57: /-- Therefore cambie_depth3_check 1000039 = true via the FAST-EXIT branch
+61:     cambie_depth3_check 1000039 = true := by
+62:   unfold cambie_depth3_check
+63:   simp only [fastTotient_eq]
+75:     (h_fast : 9849 * (4 * p^2) ≤ (3 * p^2 - p + 2 * (p - 1) * Nat.totient ((3 * p - 1) / 4)) * 10000) :
+76:     cambie_depth3_check p = true := by
+77:   unfold cambie_depth3_check
+78:   simp only [fastTotient_eq]
+83: /-- ARCHITECTURAL FACT: after split_ifs on cambie_depth3_check, the else branch

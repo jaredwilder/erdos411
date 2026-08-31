@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-06-02T11:18:57.692302+00:00",
+  "phase": 3,
+  "tested_target": "RS product lower bounds -> alpha/beta totient-ratio lower bounds -> 16p <= 3(2+alpha)(2+beta)(p-1)",
+  "result": "Naive RS/Mertens product lower bounds do not close the residual tail.",
+  "reason": "Mertens product lower bounds for arbitrary \u03c6(n)/n decay like 1/log log n; the \u03b1/\u03b2 condition needs nonvanishing product strength. With alpha=f(kN) and beta=f(2kN), the condition fails beyond finite k.",
+  "first_failure_2K_model": {
+    "kn": 33,
+    "alpha_float": 0.3318537660310512,
+    "beta_required_float": 0.2871645773958512,
+    "optimistic_beta1_succeeds": true,
+    "beta_sameK_float": 0.3318537660310512,
+    "condition_sameK": true,
+    "beta_2K_float": 0.2869187648736276,
+    "condition_2K": false
+  },
+  "critical_observation": "RS Theorem 7 alone gives generic totient-ratio lower bounds; it does not prove the needed structure-specific bound for \u03c6(c2)/c2 in the residual range."
+}

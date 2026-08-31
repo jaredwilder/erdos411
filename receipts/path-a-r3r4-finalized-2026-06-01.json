@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "run-real-oracle-finalized-v1",
+  "label": "run-real-oracle-2026-06-01T19-09-48-434Z",
+  "brief": "For x = 1e9, compute the partial Mertens product P_7(x) = prod over primes p == 7 mod 8 with 7 <= p <= x of (1 - 1/p) in PARI, and compare against the L(s, chi_8)-derived lower bound (exp(-Euler)/log x)^(1/4) * (1 - 1/(2 (log x)^2)). Also evaluate cambie_depth3_check at the largest prime p == 7 mod 8 below 1e9: predicate c2/(4p^2) >= 9849/10000 with N=(3p-1)/4, c2 = 3p^2 - p + 2(p-1)*eulerphi(N). Report both numerical results and slack at the seam.",
+  "totalRounds": 2,
+  "totalLlmCalls": 2,
+  "totalAutofires": 2,
+  "firedLocally": 2,
+  "queuedForWorker": 0,
+  "skipped": 0,
+  "errored": 0,
+  "runRoot": "C:\\Users\\jared\\Local Sites\\woocommerce-enterprise\\oracle\\use-case-runs\\run-real-oracle-2026-06-01T19-09-48-434Z",
+  "rounds": [
+    {
+      "round": 1,
+      "claimText": "For x = 1000000000, the partial Mertens product P_7(x) = prod over primes p with p == 7 mod 8 and 7 <= p <= x of (1 - 1/p) admits the explicit L(s, chi_8)-derived lower bound P_7(x) >= (exp(-Euler)/log(x))^(1/4) * (1 - 1/(2 * (log x)^2)), with slack at x = 1000000000 expected to exceed the 28 percent headroom measured at x = 1000000, testable by direct PARI computation as: default(realprecision,30); X=1000000000; P=1.0; ct=0; forprime(p=7,X,if(p%8==7,P*=1-1.0/p; ct+=1)); print(P); print((exp(-Euler)/log(X))^0.25 * (1 - 1/(2*log(X)^2))); print(P/((exp(-Euler)/log(X))^0.25 * (1 - 1/(2*log(X)^2)))).",
+      "recommendation": {
+        "schemaVersion": "oracle-tool-recommendation-v1",
+        "generatedAt": "2026-06-01T19:10:21.708Z",
+        "claimId": "run-real-oracle-2026-06-01T19-09-48-434Z-r1",
+        "obligation": {
+          "kind": "integer_factorization",
+          "confidence": 0.6,
+          "matchedSignals": [
+            "\\bcongruence\\b|\\bmod\\b|\\bresidue\\b"
+          ],
+          "requiredReadiness": "T4_ARTIFACT_CLEAN",
+          "targetPromotionCeiling": "CERT_FINITE"
+        },
+        "rankedTools": [
+          {
+            "toolId": "pari-gp",
+            "label": "PARI/GP",
+            "rank": 1,
+            "role": "primary",
+            "purpose": "Compute exact integer/factorization facts, then convert any universal claim into a certificate/formal target.",
+            "promotionCeiling": "COMP",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_PARIGP"
+          },
+          {
+            "toolId": "sagemath",
+            "label": "SageMath",
+            "rank": 2,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "COMP",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:sage"
+            ],
+            "envFlag": "ORACLE_TOOL_SAGE"
+          },
+          {
+            "toolId": "cado-nfs",
+            "label": "CADO-NFS",
+            "rank": 3,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "COMP",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "env_flag_disabled:ORACLE_TOOL_CADO_NFS",
+              "missing_executable:cado-nfs.py"
+            ],
+            "envFlag": "ORACLE_TOOL_CADO_NFS"
+          },
+          {
+            "toolId": "python",
+            "label": "Python",
+            "rank": 4,
+            "role": "cross_check",
+            "purpose": "Independent cross-check to prevent single-tool artifacts from carrying the claim alone.",
+            "promotionCeiling": "COMP",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_PYTHON"
+          },
+          {
+            "toolId": "z3",
+            "label": "Z3",
+            "rank": 5,
+            "role": "certificate",
+            "purpose": "Generate or check a finite certificate/counterexample lane.",
+            "promotionCeiling": "CERT_FINITE",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:z3"
+            ],
+            "envFlag": "ORACLE_TOOL_SMT"
+          },
+          {
+            "toolId": "lean",
+            "label": "Lean 4",
+            "rank": 6,
+            "role": "formalization",
+            "purpose": "Translate surviving claim into a proof assistant target.",
+            "promotionCeiling": "FORMAL",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_LEAN"
+          }
+        ],
+        "executionPlan": [
+          {
+            "phase": 1,
+            "toolIds": [
+              "pari-gp"
+            ],
+            "purpose": "Compute exact integer/factorization facts, then convert any universal claim into a certificate/formal target.",
+            "expectedArtifact": "tool_run.json + stdout/stderr + parsed_output.json",
+            "promotionCeiling": "CERT_FINITE"
+          },
+          {
+            "phase": 2,
+            "toolIds": [
+              "sagemath",
+              "cado-nfs",
+              "python"
+            ],
+            "purpose": "Cross-check the primary result independently.",
+            "expectedArtifact": "cross_check_tool_run.json",
+            "promotionCeiling": "CERT_FINITE"
+          },
+          {
+            "phase": 3,
+            "toolIds": [
+              "z3",
+              "lean"
+            ],
+            "purpose": "Certify finite/formal residue before theorem-grade language.",
+            "expectedArtifact": "certificate_or_formal_build_artifact.json",
+            "promotionCeiling": "FORMAL"
+          }
+        ],
+        "blockers": [],
+        "notes": [
+          "Tool recommendations do not prove claims. They define the artifact path required before promotion.",
+          "Promotion ceilings remain enforced by the supporting tool-run artifacts."
+        ]
+      },
+      "autofireOutcome": {
+        "status": "fired_locally",
+        "toolRunId": "autofire-2026-06-01T191021830Z-pari-gp-e0a5d03d",
+        "toolId": "pari-gp",
+        "artifactPath": "C:\\Users\\jared\\Local Sites\\woocommerce-enterprise\\UNIVERSAL_LAW\\oracle\\data-locker\\tool-runs\\pari-gp\\autofire-2026-06-01t191021830z-pari-gp-e0a5d03d"
+      }
+    },
+    {
+      "round": 2,
+      "claimText": "For p = 999999751 (the largest prime ≡ 7 mod 8 below 10^9), the cambie_depth3_check Boolean defined by N = (3p-1)/4 = 749999813, phi_N = eulerphi(N) = 749807808, c2 = 3*p^2 - p + 2*(p-1)*phi_N = 4499613746096282252, returns true via the level-1 short-circuit because c2/(4*p^2) = 1.1249 exceeds the threshold 0.9849 by a margin of 0.14 (14 percent), testable directly in PARI as: p = 999999751; N = (3*p-1)/4; c2 = 3*p^2 - p + 2*(p-1)*eulerphi(N); 10000*c2 >= 9849*4*p^2 (returns 1), confirming the axiom's predicted margin growth (R2 ref at p = 999983 had margin 0.0696, R4 at p = 999999751 has margin 0.1400 — 2x growth over 3 orders of magnitude in p, matching the \"Margin GROWS with p\" claim at UnconditionalClosure.lean line 533).",
+      "recommendation": {
+        "schemaVersion": "oracle-tool-recommendation-v1",
+        "generatedAt": "2026-06-01T19:11:44.074Z",
+        "claimId": "run-real-oracle-2026-06-01T19-09-48-434Z-r2",
+        "obligation": {
+          "kind": "formal_theorem",
+          "confidence": 0.75,
+          "matchedSignals": [
+            "\\blean\\b|\\bmathlib\\b|\\blake build\\b",
+            "\\binduction\\b|\\baxiom\\b|\\bsorry\\b"
+          ],
+          "requiredReadiness": "T4_ARTIFACT_CLEAN",
+          "targetPromotionCeiling": "FORMAL"
+        },
+        "rankedTools": [
+          {
+            "toolId": "lean",
+            "label": "Lean 4",
+            "rank": 1,
+            "role": "primary",
+            "purpose": "Produce or check a formal proof artifact.",
+            "promotionCeiling": "FORMAL",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_LEAN"
+          },
+          {
+            "toolId": "lake",
+            "label": "Lake",
+            "rank": 2,
+            "role": "formalization",
+            "purpose": "Translate surviving claim into a proof assistant target.",
+            "promotionCeiling": "FORMAL",
+            "available": true,
+            "readiness": "T1_DETECTED",
+            "blockers": [],
+            "envFlag": "ORACLE_TOOL_LEAN"
+          },
+          {
+            "toolId": "coq",
+            "label": "Coq",
+            "rank": 3,
+            "role": "formalization",
+            "purpose": "Translate surviving claim into a proof assistant target.",
+            "promotionCeiling": "FORMAL",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:coqc"
+            ],
+            "envFlag": "ORACLE_TOOL_COQ"
+          },
+          {
+            "toolId": "isabelle",
+            "label": "Isabelle",
+            "rank": 4,
+            "role": "formalization",
+            "purpose": "Translate surviving claim into a proof assistant target.",
+            "promotionCeiling": "FORMAL",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "env_flag_disabled:ORACLE_TOOL_ISABELLE",
+              "missing_executable:isabelle"
+            ],
+            "envFlag": "ORACLE_TOOL_ISABELLE"
+          },
+          {
+            "toolId": "z3",
+            "label": "Z3",
+            "rank": 5,
+            "role": "certificate",
+            "purpose": "Generate or check a finite certificate/counterexample lane.",
+            "promotionCeiling": "CERT_FINITE",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:z3"
+            ],
+            "envFlag": "ORACLE_TOOL_SMT"
+          },
+          {
+            "toolId": "cvc5",
+            "label": "cvc5",
+            "rank": 6,
+            "role": "certificate",
+            "purpose": "Generate or check a finite certificate/counterexample lane.",
+            "promotionCeiling": "CERT_FINITE",
+            "available": false,
+            "readiness": "T0_REGISTERED",
+            "blockers": [
+              "missing_executable:cvc5"
+            ],
+            "envFlag": "ORACLE_TOOL_SMT"
+          }
+        ],
+        "executionPlan": [
+          {
+            "phase": 1,
+            "toolIds": [
+              "lean"
+            ],
+            "purpose": "Produce or check a formal proof artifact.",
+            "expectedArtifact": "tool_run.json + stdout/stderr + parsed_output.json",
+            "promotionCeiling": "FORMAL"
+          },
+          {
+            "phase": 2,
+            "toolIds": [
+              "lake",
+              "coq",
+              "isabelle",
+              "z3",
+              "cvc5"
+            ],
+            "purpose": "Certify finite/formal residue before theorem-grade language.",
+            "expectedArtifact": "certificate_or_formal_build_artifact.json",
+            "promotionCeiling": "FORMAL"
+          }
+        ],
+        "blockers": [],
+        "notes": [
+          "Tool recommendations do not prove claims. They define the artifact path required before promotion.",
+          "Promotion ceilings remain enforced by the supporting tool-run artifacts."
+        ]
+      },
+      "autofireOutcome": {
+        "status": "fired_locally",
+        "toolRunId": "autofire-2026-06-01T191144187Z-lean-de4b547d",
+        "toolId": "lean",
+        "artifactPath": "C:\\Users\\jared\\Local Sites\\woocommerce-enterprise\\UNIVERSAL_LAW\\oracle\\data-locker\\tool-runs\\lean\\autofire-2026-06-01t191144187z-lean-de4b547d"
+      }
+    }
+  ],
+  "finalizedAt": "2026-06-01T19:12:19.419Z"
+}

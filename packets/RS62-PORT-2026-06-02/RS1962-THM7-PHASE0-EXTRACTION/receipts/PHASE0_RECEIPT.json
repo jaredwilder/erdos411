@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-06-02T11:07:44.025654+00:00",
+  "phase": 0,
+  "source": "Rosser-Schoenfeld 1962, page 70 scan",
+  "rs_theorem7": {
+    "type": "Mertens product estimate",
+    "lower": "e^{-C}/log x * (1 - 1/(2 log^2 x)) < prod_{p<=x}(1-1/p), for 285 <= x",
+    "upper": "prod_{p<=x}(1-1/p) < e^{-C}/log x * (1 + 1/(2 log^2 x)), for 1 < x",
+    "equations": [
+      "3.25",
+      "3.26"
+    ]
+  },
+  "correction": "Existing EG411 comments conflate Theorem 7 with the reciprocal-prime sum estimate; the latter is Theorem 5, not Theorem 7.",
+  "cambie_boolean_target": "cambie_depth3_check p = true for p > 1_000_000, prime p, p % 8 = 7",
+  "cambie_branches": {
+    "A_fast_exit": "9849 * (4 * p^2) <= c2 * 10000",
+    "B_depth3_overshoot": "4 * p^3 <= p*c2 + (p-1)*phi(c2)"
+  },
+  "phase1_required_output": "Prove RS product lower bound implies one of the Cambie branches."
+}

@@ -1,0 +1,22 @@
+{
+ "tag": "noncascade",
+ "elapsed_sec": 230.4,
+ "terminals": 136435,
+ "scan_nodes": 121827,
+ "div_nodes": 14608,
+ "max_w": 199969,
+ "max_ms": 18580.5,
+ "slow_nodes": [],
+ "solutions": [],
+ "anomalies": [],
+ "walk_stats": {
+  "terminals": 0,
+  "branches": 137160,
+  "pruned_chain": 88314,
+  "skipped_subtrees": 1,
+  "dead_children": 0,
+  "scan_nodes": 0,
+  "div_nodes": 0,
+  "max_w": 0
+ }
+}

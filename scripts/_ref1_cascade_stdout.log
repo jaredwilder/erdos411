@@ -1,0 +1,1 @@
+walk stats: {'terminals': 0, 'branches': 136241, 'pruned_chain': 88037, 'skipped_subtrees': 0, 'dead_children': 0, 'scan_nodes': 0, 'div_nodes': 0, 'max_w': 0}; jobs=136241

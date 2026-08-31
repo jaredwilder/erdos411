@@ -1,0 +1,10 @@
+{
+  "README.md": "4dafc9565e87ddf613f2def0fc6da28baba22e680d0eea02f50f4aaeb1c16039",
+  "docs/PHASE2_EXECUTION_REPORT.md": "0495ed482b72069eb3382484828fa862d2482ed4d966d78dc62f7ada04061b41",
+  "docs/PHASE3_HANDOFF_RS_TO_ALPHA_BETA.md": "9e2e98b9244446b3e46e43f0e9d553e2c01309bc7aa5675582b8eb3c4964c648",
+  "lean/Depth3AlphaBetaBridge.lean": "f708795f7a00e259d558777729fc6028c935dca0194c40be216abe260249e986",
+  "lean/TailAlphaBetaNatTarget.lean": "1061fe35cce244de83805c683aa081e5ce5a1f78902a9d209b39efab4572aae8",
+  "receipts/PHASE2_RECEIPT.json": "61485f7a3b6b235b37807e7492c0a32cb21c9a398131a91255c6e2de1a94e7f7",
+  "receipts/alpha_beta_sanity.json": "fa4a44af5f0147a85e5babf34d0ba9eff764b024cfda670903f7900373124462",
+  "scripts/phase2_alpha_beta_sanity.py": "b65501ed101f5eb9a6faebb11afbcd1c0bdc75b5359fa893d0b5d3dfa8afa54e"
+}

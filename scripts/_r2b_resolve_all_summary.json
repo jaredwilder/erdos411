@@ -1,0 +1,13 @@
+{
+ "summary": {
+  "terminals_checked": 148753,
+  "fact_bad": 0,
+  "total_divisors_enumerated": 5607990,
+  "max_divisors": 1536,
+  "eq_pairs_total": 6,
+  "square_eq": 0,
+  "neg_branch_pass": 0,
+  "anomalies": 0
+ },
+ "anomalies": []
+}

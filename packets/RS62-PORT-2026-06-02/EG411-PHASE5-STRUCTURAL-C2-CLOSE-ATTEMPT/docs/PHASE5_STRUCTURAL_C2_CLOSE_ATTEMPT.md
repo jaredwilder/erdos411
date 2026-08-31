@@ -1,0 +1,355 @@
+# Phase 5 — Structural c2 Close Attempt
+
+## Mission
+
+Finish the structural `c2` tail theorem:
+
+```lean
+theorem structural_c2_tail
+    (p : Nat)
+    (hp_lo : 1000000 < p)
+    (hp_prime : Nat.Prime p)
+    (hp_mod : p % 8 = 7)
+    (hp_ge : 7 ≤ p) :
+    FastExitBranch p ∨ Depth3OvershootBranch p
+```
+
+## Phase 5 delivered
+
+Phase 5 converts the tail into exact threshold inequalities.
+
+### 1. Exact fast-exit α threshold
+
+Let
+
+```text
+N = (3p−1)/4
+α = φ(N)/N
+c2 = 3p² − p + 2(p−1)αN.
+```
+
+Fast-exit holds exactly when
+
+```text
+α ≥ α_fast(p)
+```
+
+where
+
+```text
+α_fast(p)
+=
+[(9849/10000)·4p² − (3p²−p)]
+/
+[(1/2)(p−1)(3p−1)].
+```
+
+Lean theorem:
+
+```lean
+fast_exit_from_alpha_threshold
+```
+
+### 2. Exact depth β threshold
+
+Let
+
+```text
+β = φ(c2)/c2.
+```
+
+Depth-3 overshoot follows if
+
+```text
+β ≥ β_required(p,α)
+```
+
+where
+
+```text
+β_required(p,α)
+=
+16p/[3(2+α)(p−1)] − 2.
+```
+
+Lean theorem:
+
+```lean
+depth_condition_from_beta_threshold
+```
+
+### 3. Structural exclusion
+
+Lean theorem:
+
+```lean
+squarefree_factor_exclusion_int
+```
+
+proves the structural mechanism:
+
+```text
+q | N and q ∤ 2(p−1)φ(N)  ⇒  q ∤ c2.
+```
+
+## Verification to p ≤ 1,000,000
+
+Receipt:
+
+```text
+receipts/phase5_threshold_verifier_1e6.json
+```
+
+Summary:
+
+```json
+{
+  "limit": 1000000,
+  "bad_count": 0,
+  "fast_fail_count": 126,
+  "fast_fail_first20": [
+    {
+      "p": 7,
+      "alpha": 0.8,
+      "alpha_req": 0.8840066666666667,
+      "beta": 0.48936170212765956,
+      "beta_req": 0.2222222222222222,
+      "margin": 0.26713947990543735,
+      "actual_depth": true
+    },
+    {
+      "p": 5647,
+      "alpha": 0.6233766233766234,
+      "alpha_req": 0.626666014585035,
+      "beta": 0.31786007068084066,
+      "beta_req": 0.03336337884585483,
+      "margin": 0.2844966918349858,
+      "actual_depth": true
+    },
+    {
+      "p": 11527,
+      "alpha": 0.599652978600347,
+      "alpha_req": 0.6265303047010069,
+      "beta": 0.48648634751857783,
+      "beta_req": 0.05173386571271904,
+      "margin": 0.4347524818058588,
+      "actual_depth": true
+    },
+    {
+      "p": 11807,
+      "alpha": 0.5962732919254659,
+      "alpha_req": 0.6265272142455869,
+      "beta": 0.363635626818903,
+      "beta_req": 0.0544004737947158,
+      "margin": 0.3092351530241872,
+      "actual_depth": true
+    },
+    {
+      "p": 14887,
+      "alpha": 0.6018808777429467,
+      "alpha_req": 0.6265008925345689,
+      "beta": 0.33555975719685743,
+      "beta_req": 0.049936896585401125,
+      "margin": 0.2856228606114563,
+      "actual_depth": true
+    },
+    {
+      "p": 22447,
+      "alpha": 0.6158598158598159,
+      "alpha_req": 0.6264669107933423,
+      "beta": 0.4999999989883771,
+      "beta_req": 0.03893607306122698,
+      "margin": 0.4610639259271501,
+      "actual_depth": true
+    },
+    {
+      "p": 48767,
+      "alpha": 0.5905673274094326,
+      "alpha_req": 0.626430797536208,
+      "beta": 0.39098485167130054,
+      "beta_req": 0.05879331632031213,
+      "margin": 0.3321915353509884,
+      "actual_depth": true
+    },
+    {
+      "p": 67247,
+      "alpha": 0.6186180231981758,
+      "alpha_req": 0.6264223339827834,
+      "beta": 0.39999999954961446,
+      "beta_req": 0.036727998079216034,
+      "margin": 0.36327200147039845,
+      "actual_depth": true
+    },
+    {
+      "p": 69767,
+      "alpha": 0.6054467271858576,
+      "alpha_req": 0.6264215272604062,
+      "beta": 0.3999246643737871,
+      "beta_req": 0.047023154880728224,
+      "margin": 0.3529015094930589,
+      "actual_depth": true
+    },
+    {
+      "p": 70327,
+      "alpha": 0.6188264290454072,
+      "alpha_req": 0.6264213558401757,
+      "beta": 0.39598060119987594,
+      "beta_req": 0.03656458918833933,
+      "margin": 0.3594160120115366,
+      "actual_depth": true
+    },
+    {
+      "p": 75367,
+      "alpha": 0.6114108801415303,
+      "alpha_req": 0.6264199276933723,
+      "beta": 0.3999999996404458,
+      "beta_req": 0.04234582143519784,
+      "margin": 0.357654178205248,
+      "actual_depth": true
+    },
+    {
+      "p": 76487,
+      "alpha": 0.6191928876492635,
+      "alpha_req": 0.6264196358873781,
+      "beta": 0.39299147082944036,
+      "beta_req": 0.03627731581718093,
+      "margin": 0.35671415501225945,
+      "actual_depth": true
+    },
+    {
+      "p": 80687,
+      "alpha": 0.599652978600347,
+      "alpha_req": 0.6264186137655033,
+      "beta": 0.4097799787985001,
+      "beta_req": 0.051581298387448335,
+      "margin": 0.35819868041105174,
+      "actual_depth": true
+    },
+    {
+      "p": 88807,
+      "alpha": 0.6197732902935215,
+      "alpha_req": 0.6264169118072281,
+      "beta": 0.39745202795567985,
+      "beta_req": 0.035822492387498815,
+      "margin": 0.36162953556818106,
+      "actual_depth": true
+    },
+    {
+      "p": 98047,
+      "alpha": 0.620112871421772,
+      "alpha_req": 0.6264153180103526,
+      "beta": 0.3862068906228714,
+      "beta_req": 0.03555647840278603,
+      "margin": 0.35065041222008536,
+      "actual_depth": true
+    },
+    {
+      "p": 104207,
+      "alpha": 0.6018808777429467,
+      "alpha_req": 0.6264144125047222,
+      "beta": 0.34285713492904185,
+      "beta_req": 0.04981886743180233,
+      "margin": 0.2930382674972395,
+      "actual_depth": true
+    },
+    {
+      "p": 124367,
+      "alpha": 0.6175288126507639,
+      "alpha_req": 0.6264120762026046,
+      "beta": 0.3999999993413284,
+      "beta_req": 0.03756160838873133,
+      "margin": 0.36243839095259706,
+      "actual_depth": true
+    },
+    {
+      "p": 127727,
+      "alpha": 0.6173182316404823,
+      "alpha_req": 0.6264117585217686,
+      "beta": 0.42600510149069376,
+      "beta_req": 0.037725113021962985,
+      "margin": 0.38827998846873074,
+      "actual_depth": true
+    },
+    {
+      "p": 131927,
+      "alpha": 0.6209510334023953,
+      "alpha_req": 0.6264113841765737,
+      "beta": 0.3995748103964207,
+      "beta_req": 0.034900191597115715,
+      "margin": 0.36467461879930496,
+      "actual_depth": true
+    },
+    {
+      "p": 135007,
+      "alpha": 0.6210063700557997,
+      "alpha_req": 0.6264111244598626,
+      "beta": 0.3826086833717715,
+      "beta_req": 0.03485687737450121,
+      "margin": 0.34775180599727035,
+      "actual_depth": true
+    }
+  ],
+  "min_beta_margin_on_fast_fail": {
+    "p": 282847,
+    "margin": 0.24111176316982824,
+    "alpha": 0.5702029368091074,
+    "alpha_req": 0.6264053098424528,
+    "beta": 0.3161822227485283,
+    "beta_req": 0.07507045957870008
+  },
+  "bad_first20": []
+}
+```
+
+## Phase 5 verdict
+
+Phase 5 did **not** fully eliminate the tail axiom.
+
+It did finish the algebraic threshold layer and identified the single exact
+remaining theorem.
+
+## The one remaining theorem
+
+```text
+Complementary Totient Product Lemma
+```
+
+Formal statement in words:
+
+```text
+For p > 1,000,000 prime with p ≡ 7 mod 8:
+
+If φ(N)/N < α_fast(p), then the squarefree factors of N excluded from c2
+force
+
+  φ(c2)/c2 ≥ β_required(p, φ(N)/N).
+
+Therefore depth-3 overshoot holds.
+```
+
+Equivalently:
+
+```lean
+theorem complementary_totient_product
+    (p : Nat)
+    (hp_lo : 1000000 < p)
+    (hp_prime : Nat.Prime p)
+    (hp_mod : p % 8 = 7)
+    (hp_ge : 7 ≤ p) :
+    ¬ FastExitBranch p → Depth3OvershootBranch p
+```
+
+Then:
+
+```lean
+structural_c2_tail = by
+  by_cases h : FastExitBranch p
+  · exact Or.inl h
+  · exact Or.inr (complementary_totient_product p ... h)
+```
+
+## Locked conclusion
+
+This phase is not open-ended anymore. The close is blocked by exactly one
+structure-specific theorem, not Mathlib, not generic RS product, and not EG411
+itself.

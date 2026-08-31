@@ -1,0 +1,26 @@
+=== SYMBOLIC: per-coordinate derivative of g, j = 1..7 ===
+  j=1: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+  j=2: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+  j=3: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+  j=4: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+  j=5: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+  j=6: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+  j=7: dg/dq1 == (A*prod_(i>1)(qi-1) + 2)/(q1^2*prod_(i>1)qi)  [numerator > 0]  -> True
+=== SYMBOLIC: dH/dx where H(x) = A(1-1/x)^j - B - 2/x^j ===
+  j=1: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+  j=2: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+  j=3: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+  j=4: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+  j=5: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+  j=6: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+  j=7: dH/dx == j*A*(1-1/x)^(j-1)/x^2 + 2j/x^(j+1)  -> True
+=== NUMERIC: monotonicity of predicate fire (1000 configs) ===
+  configs with a fire point tested: 1000, monotonicity violations: 0
+=== NUMERIC: cap implication vs brute force ===
+  cap-fire configs brute-checked: 988, violations: 0
+=== NUMERIC: dead A<=B implication ===
+  dead-node violations: 0
+=== SYMBOLIC: terminal identity  t*(c*s-A) = A*(s-1)+2 ===
+  A(s-1)(t-1) - (Bst+2)  ==  t(cs-A) - (A(s-1)+2)  -> True
+
+FAILS: 0

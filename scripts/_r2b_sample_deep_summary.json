@@ -1,0 +1,14 @@
+{
+ "stats": {
+  "audited": 550,
+  "window_scanned": 530,
+  "window_skipped_too_big": 20,
+  "stored_value_mismatch": 0,
+  "fact_mismatch": 0,
+  "eq_hits_window": 0,
+  "eq_hits_divisor": 0,
+  "neg_branch": 0,
+  "tree_disagree": 0
+ },
+ "disagreements": []
+}

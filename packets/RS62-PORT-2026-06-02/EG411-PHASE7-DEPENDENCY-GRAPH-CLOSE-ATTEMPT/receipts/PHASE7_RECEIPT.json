@@ -1,0 +1,64 @@
+{
+  "created_at": "2026-06-02T11:43:50.031202+00:00",
+  "phase": 7,
+  "mission": "Attack singular complementary product theorem",
+  "fully_closed": false,
+  "delivered": [
+    "dependency-graph reappearance criterion",
+    "q|N and q|c2 implies q|phi(N) modulo prime divisor split",
+    "verification of dependency explanation to 1e6",
+    "final dependency-graph product theorem statement"
+  ],
+  "blocker": "Dependency-Graph Product Theorem",
+  "verifier": {
+    "limit": 1000000,
+    "fast_fail_count": 126,
+    "all_reappear_explained": true,
+    "dependency_fail_count": 0,
+    "min_margin": {
+      "p": 282847,
+      "N": 212135,
+      "c2": 308433097700,
+      "alpha": 0.5702029368091074,
+      "alpha_req": 0.6264053098424528,
+      "beta": 0.3161822227485283,
+      "beta_req": 0.07507045957870008,
+      "margin": 0.24111176316982824,
+      "facN": {
+        "5": 1,
+        "7": 1,
+        "11": 1,
+        "19": 1,
+        "29": 1
+      },
+      "facC": {
+        "2": 2,
+        "5": 2,
+        "7": 1,
+        "13": 1,
+        "1087": 1,
+        "31181": 1
+      },
+      "reappear": [
+        5,
+        7
+      ],
+      "excluded": [
+        11,
+        19,
+        29
+      ],
+      "explained": {
+        "5": [
+          "11\u22611 mod 5"
+        ],
+        "7": [
+          "29\u22611 mod 7"
+        ]
+      },
+      "unexplained": []
+    },
+    "conclusion": "Dependency graph explains every N-factor reappearance in c2 up to limit; product lower-bound theorem still required for full proof."
+  },
+  "close_status": "not closed"
+}

@@ -1,0 +1,43 @@
+15: This file attempts the FULL proof of `cambie_depth3_check p = true`
+16: for p ∈ (10^6, primorial5(35)) using the structural Mertens chain only —
+17: NO invocation of `rosser_schoenfeld_1962_thm7_cambie` or any axiom-using
+18: theorem (no `cambie_depth3_check_asymptotic`, no `cambie_depth3_check_omega_product`).
+22: 1. Unfold `cambie_depth3_check` and rewrite `fastTotient` to `Nat.totient`
+23:    via `fastTotient_eq` (PROVEN in UnconditionalClosure.lean).
+25:    to obtain ω(N) ≤ 34 ∧ φ(N) · omegaDen(34) ≥ N · omegaNum(34).
+33:    - Apply `c2_omegaDen_lower_bound` (PROVEN in CambieDischargeStructural.lean)
+53:   Nat.totient ((3*p-1)/4) * omegaDen 34 ≥ ((3*p-1)/4) * omegaNum 34
+55: which is `φ(N)/N ≥ omegaNum(34)/omegaDen(34)` in cross-multiplied form. -/
+58:     needed for c2_omegaDen_lower_bound. -/
+61:     (hp_hi : p < primorial5 35) :
+62:     Nat.totient ((3 * p - 1) / 4) * omegaDen 34 ≥
+63:       ((3 * p - 1) / 4) * omegaNum 34 :=
+67:     satisfies `c2 * omegaDen(34) ≥ (3p² - p) * omegaDen(34) + 2(p-1) * N * omegaNum(34)`.
+71:     (hp_hi : p < primorial5 35) (hp_lo : 1000000 < p) :
+72:     (3 * p^2 - p + 2 * (p - 1) * Nat.totient ((3 * p - 1) / 4)) * omegaDen 34 ≥
+73:       (3 * p^2 - p) * omegaDen 34 +
+74:       2 * (p - 1) * ((3 * p - 1) / 4) * omegaNum 34 := by
+76:   exact CambieDischargeStructural.c2_omegaDen_lower_bound p (by omega) h_phi
+81: we record the literal Nat values of `omegaNum 34` and `omegaDen 34`. -/
+83: /-- omegaNum 34 is the literal product 4·6·10·12·…·148. -/
+84: private lemma omegaNum34_value :
+85:     omegaNum 34 =
+89: /-- omegaDen 34 is the literal product 5·7·11·13·…·149. -/
+90: private lemma omegaDen34_value :
+91:     omegaDen 34 =
+95: /-! ## The MAIN theorem: cambie_depth3_check axiom-free for p ∈ (10^6, primorial5(35))
+97: Mirror signature of `cambie_depth3_check_omega_product` exactly. -/
+99: /-- **Axiom-free version of cambie_depth3_check_omega_product.**
+101: For p prime, p ≡ 7 (mod 8), p ≥ 7, p ∈ (10⁶, primorial5(35)):
+102:   `cambie_depth3_check p = true`
+106: - `CambieDischargeStructural.c2_omegaDen_lower_bound` (PROVEN)
+107: - `fastTotient_eq` (PROVEN in UnconditionalClosure.lean)
+111: It does NOT invoke `cambie_depth3_check_omega_product`, `cambie_depth3_check_asymptotic`,
+112: or `rosser_schoenfeld_1962_thm7_cambie`. -/
+113: theorem cambie_depth3_check_no_axiom
+114:     (p : Nat) (hp_lo : 1000000 < p) (hp_hi : p < primorial5 35)
+116:     cambie_depth3_check p = true := by
+126:   unfold cambie_depth3_check
+127:   simp only [fastTotient_eq]
+138:     -- The negation: ¬ (9849 * (4 * p^2) ≤ c2 * 10000)
+144:     -- For p < primorial5(35), the structural chain combined with the c2 structural

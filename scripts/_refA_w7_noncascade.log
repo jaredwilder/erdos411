@@ -1,0 +1,27 @@
+[phase1] j3-nodes=657 internal_branches=726 chain_pruned=426 t=0.0s
+[phase2] terminal jobs=136435 t=0.2s
+  [20/455] terminals=6000 direct=5998 divisor=1 sols=0 t=7.1s
+  [40/455] terminals=12000 direct=11994 divisor=4 sols=0 t=7.5s
+  [60/455] terminals=18000 direct=17994 divisor=4 sols=0 t=7.8s
+  [80/455] terminals=24000 direct=23992 divisor=5 sols=0 t=8.0s
+  [100/455] terminals=30000 direct=29988 divisor=5 sols=0 t=8.3s
+  [120/455] terminals=36000 direct=35980 divisor=12 sols=0 t=8.8s
+  [140/455] terminals=41935 direct=41910 divisor=13 sols=0 t=9.0s
+  [160/455] terminals=47935 direct=47907 divisor=14 sols=0 t=9.3s
+  [180/455] terminals=53935 direct=53901 divisor=18 sols=0 t=9.7s
+  [200/455] terminals=59935 direct=59898 divisor=19 sols=0 t=10.4s
+  [220/455] terminals=65935 direct=65897 divisor=19 sols=0 t=11.0s
+  [240/455] terminals=71935 direct=71891 divisor=23 sols=0 t=11.6s
+  [260/455] terminals=77935 direct=77859 divisor=55 sols=0 t=12.1s
+  [280/455] terminals=83935 direct=83857 divisor=57 sols=0 t=13.0s
+  [300/455] terminals=89935 direct=89852 divisor=59 sols=0 t=13.4s
+  [320/455] terminals=95935 direct=95849 divisor=60 sols=0 t=13.7s
+  [340/455] terminals=101935 direct=101847 divisor=62 sols=0 t=14.4s
+  [360/455] terminals=107935 direct=107841 divisor=67 sols=0 t=15.0s
+  [380/455] terminals=113935 direct=113832 divisor=74 sols=0 t=15.3s
+  [400/455] terminals=119935 direct=119826 divisor=76 sols=0 t=15.8s
+  [420/455] terminals=125935 direct=125822 divisor=78 sols=0 t=16.1s
+  [440/455] terminals=131935 direct=131818 divisor=81 sols=0 t=16.8s
+  [455/455] terminals=136435 direct=136065 divisor=334 sols=0 t=25.7s
+{"omega": 7, "elapsed_sec": 25.8, "j3_nodes": 656, "jobs": 136435, "counters": {"terminals": 136435, "empty_window": 36, "direct": 136065, "divisor": 334, "direct_primes": 887317104, "direct_cells": 11873837532, "max_direct_window": 5981871, "dual_audits": 16, "dual_mismatch": 0, "chain_pruned_internal": 426, "internal_branches": 726, "chain_pruned_p5": 87888}}
+SOLUTIONS: []

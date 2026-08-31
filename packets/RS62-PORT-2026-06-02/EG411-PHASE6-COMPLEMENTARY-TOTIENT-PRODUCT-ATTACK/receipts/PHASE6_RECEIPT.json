@@ -1,0 +1,69 @@
+{
+  "created_at": "2026-06-02T11:39:45.443453+00:00",
+  "phase": 6,
+  "mission": "Complementary totient product attack",
+  "fully_closed": false,
+  "everything_thrown_at_it": [
+    "exact alpha threshold",
+    "exact beta threshold",
+    "depth threshold algebra",
+    "squarefree exclusion algebra",
+    "verification to 1e6",
+    "final Lean theorem target"
+  ],
+  "blocker": "ComplementaryTotientProductLemma: convert exclusion of N's dangerous primes from c2 into \u03c6(c2)/c2 lower bound",
+  "verifier": {
+    "limit": 1000000,
+    "fast_fail_count": 126,
+    "threshold_or_logic_bad_count": 0,
+    "exclusion_stats": {
+      "squarefree_q_count": 40716,
+      "excluded_count": 37904,
+      "reappears_via_phiN_count": 2812,
+      "divides_pminus1_count": 0
+    },
+    "min_margin_fast_fail": {
+      "p": 282847,
+      "N": 212135,
+      "alpha": 0.5702029368091074,
+      "alpha_req": 0.6264053098424528,
+      "beta": 0.3161822227485283,
+      "beta_req": 0.07507045957870008,
+      "margin": 0.24111176316982824,
+      "N_factorization": {
+        "5": 1,
+        "7": 1,
+        "11": 1,
+        "19": 1,
+        "29": 1
+      },
+      "c2_factorization": {
+        "2": 2,
+        "5": 2,
+        "7": 1,
+        "13": 1,
+        "1087": 1,
+        "31181": 1
+      },
+      "sqfree_N": [
+        5,
+        7,
+        11,
+        19,
+        29
+      ],
+      "excluded_sqfree_N": [
+        11,
+        19,
+        29
+      ],
+      "reappears_via_phiN": [
+        5,
+        7
+      ],
+      "actual_depth": true
+    },
+    "conclusion": "All fast-fail cases up to limit satisfy depth branch; exact proof still needs complementary totient product lemma."
+  },
+  "close_status": "not closed; exact remaining theorem isolated"
+}

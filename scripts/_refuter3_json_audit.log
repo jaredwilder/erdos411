@@ -1,0 +1,25 @@
+loading json...
+summary: {'omega': 7, 'elapsed_sec': 6757.5, 'terminals': 272676, 'branches': 393746, 'max_scan': 17800, 'pruned_chain': 254062, 'solutions': []}
+
+nodes: branch=727 terminal=272676 dead=120344 total=393747
+branch edges (children) counted: 393746  [stats said branches=393746]
+branch nodes fully recomputed (cap + children + chain-prune): 727
+cap mismatches: 0
+children-set mismatches: 0
+branches WITHOUT cap key (silent truncation risk): 0
+recomputed global pruned_chain: 254062  [stats said 254062]
+terminals counted: 272676  [stats said 272676]
+solutions in summary: []
+
+sampled terminal re-verification (scan count + s ranges)...
+sampled terminals re-verified: 204 scan-mismatches: 0
+divisor-mode terminals in tree: 148753  scan-mode: 123923
+max scan recomputed from nodes: 17800  [stats max_scan=17800]
+
+root children start at 5 (mx=4 -> primes from 5): OK; root cap=19
+
+independent sieve cross-check of branch children (200 sampled + max-cap node)...
+independent-sieve nodes checked: 201 (incl. max-cap node cap=5038849, P=[5, 7, 37, 1297]), mismatches: 0
+
+TOTAL ERRORS: 0
+CLEAN: every branch node's cap, children set, and chain-prune set reproduced exactly.

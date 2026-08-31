@@ -1,0 +1,9 @@
+{
+  "README.md": "2b35f63cbb9bf4aad79fc1cb99bb47575725185a219a67ed21caee85198e0fc9",
+  "contract/WORKING_CONTRACT_RS1962_THM7.md": "af5a229b871aceb42376830edcae4ae419f300232aecfb1e4357dcc6ac1501de",
+  "docs/MATHLIB_PR_PLAN.md": "489cc44df84fa2a1429716c53bc56dd61e82254bd923c3b6c5e0ab34065a0fd7",
+  "docs/RS1962_SOURCE_NOTES.md": "945452cf90a9745aa9235da28656f035a7f7b198eb664ac718826df5d90b39b1",
+  "lean/CambieDepth3FromRS.lean": "76b78da9fc86ac5c3042182aeb5732c2e085534abb6fbb3bbc63b8795fc2b65b",
+  "lean/RosserSchoenfeldTheorem7Interface.lean": "55b1e2d7084b46d7253a7222296b8882389df8bd1247d8540829b4fae4f4dba7",
+  "tasks/TASK_LEDGER.json": "a34521881a37ad344d3c63c98de7f4f6955eff0d80888f9c9c837eb302896122"
+}

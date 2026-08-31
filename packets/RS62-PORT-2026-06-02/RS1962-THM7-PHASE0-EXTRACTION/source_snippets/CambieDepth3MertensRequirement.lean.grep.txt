@@ -1,0 +1,33 @@
+6: # EG#411 Cambie Depth-3 Mertens Requirement — exact threshold
+10: The cambie depth-3 condition is `4p³ ≤ p · c2 + (p-1) · φ(c2)`.
+12: When fast-exit fails: c2 < (9849/2500) p². But more usefully:
+13:   c2 = 3p² - p + 2(p-1)·φ(N) ≥ 3p² - p  (trivial lower bound from φ ≥ 1)
+16:   4p³ ≤ p · c2 + (p-1) · φ(c2)
+17:   4p³ ≤ p · (3p² - p) + p · 2(p-1)·φ(N) + (p-1) · φ(c2)
+18:   4p³ ≤ 3p³ - p² + 2p(p-1)·φ(N) + (p-1) · φ(c2)
+19:   p³ + p² ≤ 2p(p-1)·φ(N) + (p-1) · φ(c2)
+22:   p³ ≤ 2p²·φ(N) + p·φ(c2)
+23:   p² ≤ 2p·φ(N) + φ(c2)
+26:   p² ≤ 2p · 0.4698 p + φ(c2) ⟹ φ(c2) ≥ p² - 0.9396 p² = 0.0604 p²
+28: With c2 ≈ 3.94 p² (fast-exit threshold), need:
+29:   φ(c2)/c2 ≥ 0.0604 p² / 3.94 p² = 0.01534
+31: That's a TRIVIAL Mertens lower bound — any n with ω(n) ≤ K satisfies
+37: 2. The Mertens K-value where φ/n drops below 0.01534 (effectively K ≈ ∞ for practical n).
+43: - A lower bound on φ(c2)/c2 in terms of ω(c2)
+44: - A bound on ω(c2) that grows slowly with p
+47: The CambieElseBranchAllOmega bridges (ω(c2) ∈ [3, 34]) already cover up to
+48: ω(c2) = 34, far beyond the depth-3 requirement (~K ≈ 200).
+51: namespace EG411Formal.CambieDepth3MertensRequirement
+55: /-- The depth-3 threshold ratio: φ(c2)/c2 ≥ 0.01534 suffices (when fast-exit fails). -/
+59: /-- The K=2 Mertens ratio 24/35 = 0.6857 is FAR above the depth-3 threshold 0.01534.
+64: /-- The K=34 Mertens ratio ~0.17 is STILL above the depth-3 threshold 0.01534.
+69: /-- The CambieElseBranchAllOmega bridge omega34 satisfies the abstract Mertens identity. -/
+79: /-- DOCUMENT: depth-3 closure requires φ(c2)/c2 ≥ 0.01534 (when fast-exit fails),
+80:     which is a TRIVIAL Mertens lower bound satisfied for any practical ω(c2). -/
+81: theorem Depth3MertensRequirementDoc :
+83:     -- (1) fast-exit fails ⟹ c2 ≤ 3.9396 p² (approximate)
+84:     -- (2) depth-3 fires ⟺ φ(c2)/c2 ≥ 0.0604 p² / c2 ≥ 0.01534 (approximate)
+85:     -- (3) Mertens at any K ≤ 200: φ(n)/n > 0.01534
+86:     -- (4) ω(c2) ≤ 34 covers everything we care about (the CambieElseBranchAllOmega range)
+87:     -- (5) For ω(c2) ≤ 34: K34_bridge_invokable shows the abstract Mertens identity holds
+90: end EG411Formal.CambieDepth3MertensRequirement
